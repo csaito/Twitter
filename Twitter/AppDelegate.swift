@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BDBOAuth1Manager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,6 +42,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        print("\(url.description)");
+        if (url.scheme == "twitterdemo") {
+            TwitterClient.sharedInstance.loginCallback(query: url.query!)
+            /**
+            let requestToken = BDBOAuth1Credential(queryString: url.query!)
+            
+            let twitterClient = BDBOAuth1SessionManager(baseURL: URL(string:"https://api.twitter.com")!,
+                                                        consumerKey: "c5NUWp3Mc4ixfqtqneEcHNs9Q", consumerSecret: "8qjdoXPxS8yLnLO8px0FpIVk42MsskYgFvtv8F9saA2kGiCICO")
+            
+            twitterClient?.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (token: BDBOAuth1Credential?) -> Void  in
+                    print("Got access token!")
+                
+                twitterClient?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil,
+                                   success:
+                                    { (task:URLSessionDataTask, response:Any?) -> Void in
+                                        
+                                        let user = response as! NSDictionary
+                                        print("name: \(user["name"])")
+                                        
+                    }, failure: { (task:URLSessionDataTask?, error:Error) -> Void in
+                        print("error: \(error.localizedDescription)")
+                    })
+                }
+                , failure:{ (error: Error?) in
+                    print("error: \(error!.localizedDescription)")
+            })
+ **/
+            
+        }
+        return true
+    }
 
 }
 
