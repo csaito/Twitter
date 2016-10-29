@@ -35,6 +35,10 @@ class TimelineViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func logoutClicked(_ sender: AnyObject) {
+        User.currentUser = nil
+    }
+    
     func retrieveTimeline() {
         TwitterClient.sharedInstance.getTimeline(completion: {
             (tweets: [Tweet], error: Error?) -> Void in

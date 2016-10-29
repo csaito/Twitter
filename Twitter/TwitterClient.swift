@@ -64,7 +64,7 @@ class TwitterClient: BDBOAuth1SessionManager {
                     print("keyChain storage status \(status)")
                 }
                 storedCompletionHandler?(TwitterLoginStatus.success, nil)
-                //self.verifyUser()
+                self.verifyUser()
                 //self.getTimeline(completion: storedCompletionHandler!)
             }, failure:{ (error: Error?) in
                 print("error: \(error!.localizedDescription)")
@@ -76,8 +76,9 @@ class TwitterClient: BDBOAuth1SessionManager {
         self.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil,
                  success:
             { (task:URLSessionDataTask, response:Any?) -> Void in
-                let user = response as! NSDictionary
-                print("name: \(user["name"]!)")
+                let user = User(userDirectory: response as! NSDictionary)
+                User.currentUser = user
+                print("currentUser \(User.currentUser)")
             }, failure: { (task:URLSessionDataTask?, error:Error) -> Void in
                 print("error: \(error.localizedDescription)")
         })

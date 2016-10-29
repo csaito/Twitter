@@ -7,12 +7,13 @@ import Foundation
 
 class Tweet : NSObject {
     //user profile picture, username, tweet text, and timestamp
-    var profileImageUrl: String?
-    var userName: String?
-    var screenName: String?
+
     var tweetText: String?
     var timestamp: String?
     var displayUrl: String?
+    var profileImageUrl: String?
+    var userName: String?
+    var screenName: String?
     
     init(tweetDictionary: NSDictionary) {
         print("\(tweetDictionary)")
@@ -23,9 +24,6 @@ class Tweet : NSObject {
         }
         self.tweetText = tweetDictionary["text"] as? String
         self.timestamp = tweetDictionary["created_at"] as? String
-        
-        print("profileImageUrl \(self.profileImageUrl)")
-        print("userName \(self.userName)");
     }
     
     // Creates a text representation of a tweet    
