@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -89,30 +90,54 @@
                                             <frame key="frameInset" width="375" height="162"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVM-4J-DsM">
-                                                    <frame key="frameInset" minX="108" minY="36" width="254" height="33"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVM-4J-DsM">
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jF1-Wv-cUl">
-                                                    <frame key="frameInset" minX="14" minY="36" width="86" height="90"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jF1-Wv-cUl">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="Wyb-HT-7rd"/>
+                                                        <constraint firstAttribute="width" constant="40" id="kUS-rH-1Po"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tweet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayr-wk-rmu">
-                                                    <frame key="frameInset" minX="108" minY="71" width="254" height="55"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayr-wk-rmu">
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@tweeting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYe-mS-CCh">
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="14h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajz-99-KA4">
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="MVM-4J-DsM" firstAttribute="leading" secondItem="jF1-Wv-cUl" secondAttribute="trailing" constant="6" id="0mW-Zw-Vdw"/>
+                                                <constraint firstItem="MVM-4J-DsM" firstAttribute="top" secondItem="Zd9-Pl-hs1" secondAttribute="topMargin" constant="4" id="0tw-h0-TIn"/>
+                                                <constraint firstItem="MVM-4J-DsM" firstAttribute="centerY" secondItem="Zd9-Pl-hs1" secondAttribute="centerY" id="3Pb-9R-Dxl"/>
+                                                <constraint firstItem="PYe-mS-CCh" firstAttribute="leading" secondItem="MVM-4J-DsM" secondAttribute="trailing" constant="4" id="Cqw-WH-w24"/>
+                                                <constraint firstItem="ayr-wk-rmu" firstAttribute="leading" secondItem="jF1-Wv-cUl" secondAttribute="trailing" constant="6" id="GVo-vo-67N"/>
+                                                <constraint firstItem="ajz-99-KA4" firstAttribute="leading" secondItem="PYe-mS-CCh" secondAttribute="trailing" constant="4" id="K8H-HU-5Nu"/>
+                                                <constraint firstItem="ajz-99-KA4" firstAttribute="centerY" secondItem="Zd9-Pl-hs1" secondAttribute="centerY" id="KVP-Eq-frN"/>
+                                                <constraint firstItem="jF1-Wv-cUl" firstAttribute="top" secondItem="Zd9-Pl-hs1" secondAttribute="topMargin" constant="4" id="OgR-Oj-OKG"/>
+                                                <constraint firstItem="jF1-Wv-cUl" firstAttribute="leading" secondItem="Zd9-Pl-hs1" secondAttribute="leadingMargin" constant="8" id="cft-ab-j7l"/>
+                                                <constraint firstItem="PYe-mS-CCh" firstAttribute="centerY" secondItem="Zd9-Pl-hs1" secondAttribute="centerY" id="ekY-1F-vdv"/>
+                                                <constraint firstItem="ayr-wk-rmu" firstAttribute="top" secondItem="MVM-4J-DsM" secondAttribute="bottom" constant="4" id="uLc-C5-aWA"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ajz-99-KA4" secondAttribute="trailing" constant="8" id="xh9-KJ-9Zd"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="nameLabel" destination="MVM-4J-DsM" id="3A3-Ad-JD8"/>
-                                            <outlet property="profileImageView" destination="jF1-Wv-cUl" id="Srv-vs-wZm"/>
-                                            <outlet property="tweetLabel" destination="ayr-wk-rmu" id="jti-w5-D8Q"/>
+                                            <outlet property="displayNameLabel" destination="PYe-mS-CCh" id="tMv-63-3vp"/>
+                                            <outlet property="profileImageView" destination="jF1-Wv-cUl" id="B0f-bU-c0y"/>
+                                            <outlet property="tweetLabel" destination="ayr-wk-rmu" id="n9g-rW-zuU"/>
+                                            <outlet property="tweetTimeLabel" destination="ajz-99-KA4" id="r7b-uV-1TV"/>
+                                            <outlet property="userNameLabel" destination="MVM-4J-DsM" id="Eso-kt-0gM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -140,9 +165,10 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aHd-bk-WRD" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aZe-JU-wGG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aZe-JU-wGG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.10943647469999999" green="0.63020360470000003" blue="0.94768673179999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

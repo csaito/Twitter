@@ -10,29 +10,28 @@ import UIKit
 
 class TweetTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var tweetTimeLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
+    @IBOutlet weak var displayNameLabel: UILabel!
     
     var tweet: Tweet? {
         didSet {
-            print("setting tweet \(tweet!)")
-            if let tweetText = tweet!.tweetText {
-                self.tweetLabel.text = tweetText
-            } else {
-                self.tweetLabel.text = "Tweet Tweet"
+            if let tweet = tweet {
+                self.userNameLabel.text = tweet.userName
+                self.tweetLabel.text = tweet.tweetText
+                if let screenName = tweet.screenName {
+                    self.displayNameLabel.text = "@ \(screenName)"
+                }
+                self.tweetTimeLabel.text = tweet.getTimestampForDisplay()
+                if let imageUrl = tweet.profileImageUrl {
+                    self.profileImageView.setImageWith(URL(string: imageUrl)!)
+                } else {
+                    self.profileImageView.image = UIImage(named: "DefaultProfile")
+                }
             }
-            if let imageUrl = tweet!.profileImageUrl {
-                self.profileImageView.setImageWith(URL(fileURLWithPath: imageUrl))
-            } else {
-                self.profileImageView.image = nil
-            }
-            if let name = tweet!.userName {
-                self.nameLabel.text = name
-            } else {
-                self.nameLabel.text = "Name"
-            }
-            
         }
     }
     
@@ -45,6 +44,12 @@ class TweetTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.profileImageView.layer.cornerRadius = 5
+        self.profileImageView.clipsToBounds = true;
     }
 
 }

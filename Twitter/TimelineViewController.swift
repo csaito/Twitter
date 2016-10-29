@@ -7,23 +7,27 @@
 //
 
 import UIKit
+import AVFoundation
 
 class TimelineViewController: UIViewController {
 
     @IBOutlet weak var tweetTableView: UITableView!
+    var refreshControl = UIRefreshControl()
     
     var tweets = [Tweet]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Home"
         self.tweetTableView.dataSource = self
         self.tweetTableView.estimatedRowHeight = 100
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
         
         self.retrieveTimeline();
+        self.refreshControl.addTarget(self, action: #selector(refreshControlAction(refreshControl:)), for: UIControlEvents.valueChanged)
+        self.tweetTableView.insertSubview(refreshControl, at: 0)
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,20 +39,15 @@ class TimelineViewController: UIViewController {
         TwitterClient.sharedInstance.getTimeline(completion: {
             (tweets: [Tweet], error: Error?) -> Void in
                 self.tweets = tweets
+                self.refreshControl.endRefreshing()
                 self.tweetTableView.reloadData()
-            });
+        });
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        self.retrieveTimeline()
     }
-    */
 
 }
 
@@ -62,6 +61,10 @@ extension TimelineViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tweets.count
+    }
+    
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
 }
