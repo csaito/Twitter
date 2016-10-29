@@ -90,19 +90,14 @@
                                             <frame key="frameInset" width="375" height="162"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVM-4J-DsM">
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jF1-Wv-cUl">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="Wyb-HT-7rd"/>
                                                         <constraint firstAttribute="width" constant="40" id="kUS-rH-1Po"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayr-wk-rmu">
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVM-4J-DsM">
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -116,18 +111,24 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayr-wk-rmu">
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="MVM-4J-DsM" firstAttribute="leading" secondItem="jF1-Wv-cUl" secondAttribute="trailing" constant="6" id="0mW-Zw-Vdw"/>
                                                 <constraint firstItem="MVM-4J-DsM" firstAttribute="top" secondItem="Zd9-Pl-hs1" secondAttribute="topMargin" constant="4" id="0tw-h0-TIn"/>
-                                                <constraint firstItem="MVM-4J-DsM" firstAttribute="centerY" secondItem="Zd9-Pl-hs1" secondAttribute="centerY" id="3Pb-9R-Dxl"/>
+                                                <constraint firstItem="ajz-99-KA4" firstAttribute="centerY" secondItem="MVM-4J-DsM" secondAttribute="centerY" id="4sv-Ev-NZ7"/>
+                                                <constraint firstAttribute="bottom" secondItem="ayr-wk-rmu" secondAttribute="bottom" constant="8" id="8b6-oU-3nB"/>
                                                 <constraint firstItem="PYe-mS-CCh" firstAttribute="leading" secondItem="MVM-4J-DsM" secondAttribute="trailing" constant="4" id="Cqw-WH-w24"/>
+                                                <constraint firstAttribute="trailing" secondItem="ayr-wk-rmu" secondAttribute="trailing" constant="8" id="GUq-ZG-qqO"/>
                                                 <constraint firstItem="ayr-wk-rmu" firstAttribute="leading" secondItem="jF1-Wv-cUl" secondAttribute="trailing" constant="6" id="GVo-vo-67N"/>
+                                                <constraint firstItem="PYe-mS-CCh" firstAttribute="centerY" secondItem="MVM-4J-DsM" secondAttribute="centerY" id="I9B-Z4-u85"/>
                                                 <constraint firstItem="ajz-99-KA4" firstAttribute="leading" secondItem="PYe-mS-CCh" secondAttribute="trailing" constant="4" id="K8H-HU-5Nu"/>
-                                                <constraint firstItem="ajz-99-KA4" firstAttribute="centerY" secondItem="Zd9-Pl-hs1" secondAttribute="centerY" id="KVP-Eq-frN"/>
                                                 <constraint firstItem="jF1-Wv-cUl" firstAttribute="top" secondItem="Zd9-Pl-hs1" secondAttribute="topMargin" constant="4" id="OgR-Oj-OKG"/>
                                                 <constraint firstItem="jF1-Wv-cUl" firstAttribute="leading" secondItem="Zd9-Pl-hs1" secondAttribute="leadingMargin" constant="8" id="cft-ab-j7l"/>
-                                                <constraint firstItem="PYe-mS-CCh" firstAttribute="centerY" secondItem="Zd9-Pl-hs1" secondAttribute="centerY" id="ekY-1F-vdv"/>
                                                 <constraint firstItem="ayr-wk-rmu" firstAttribute="top" secondItem="MVM-4J-DsM" secondAttribute="bottom" constant="4" id="uLc-C5-aWA"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ajz-99-KA4" secondAttribute="trailing" constant="8" id="xh9-KJ-9Zd"/>
                                             </constraints>
@@ -151,7 +152,14 @@
                             <constraint firstItem="tDO-SS-Ul2" firstAttribute="top" secondItem="Kcb-AW-HCb" secondAttribute="bottom" id="o9o-5F-t6d"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="AWq-EM-zT5"/>
+                    <navigationItem key="navigationItem" id="AWq-EM-zT5">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="RrX-Aa-7C4">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="Oih-9r-2Va">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tweetTableView" destination="Kcb-AW-HCb" id="m1e-UF-O1f"/>
                     </connections>

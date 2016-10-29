@@ -35,6 +35,8 @@ class TwitterClient: BDBOAuth1SessionManager {
     }
     
     func login(login: String, completion: @escaping (TwitterLoginStatus, Error?) -> Void) -> Void {
+        
+        //completion(TwitterLoginStatus.success, nil)
         self.fetchRequestToken(withPath: "oauth/request_token", method: "GET",
                                          callbackURL: URL(string: "twitterdemo://oauth"), scope: nil, success:{ (credential: BDBOAuth1Credential?) -> Void in                                            if let credential = credential {
                                                 if let token = credential.token {
@@ -47,6 +49,7 @@ class TwitterClient: BDBOAuth1SessionManager {
                 print("error \(error)")
                 completion(TwitterLoginStatus.failure, error)
         })
+ 
     }
     
     func loginCallback(query: String) {
@@ -57,7 +60,8 @@ class TwitterClient: BDBOAuth1SessionManager {
         self.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (token: BDBOAuth1Credential?) -> Void  in
                 print("Got access token!")
                 if let token = token {
-                    self.requestSerializer.saveAccessToken(token)
+                    let status = self.requestSerializer.saveAccessToken(token)
+                    print("keyChain storage status \(status)")
                 }
                 storedCompletionHandler?(TwitterLoginStatus.success, nil)
                 //self.verifyUser()
