@@ -48,15 +48,31 @@ class TimelineViewController: UIViewController {
         });
     }
     
-    let item = "ComposeUpdateSegue"
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        /**
         if segue.identifier == "ComposeUpdateSegue" {
+            let navigationController = segue.destination as! UINavigationController
+            let composeViewController = navigationController.viewControllers[0] as! ComposeViewController
+            self.tweetVc = composeViewController as TweetProtocol
             // Don't really have to do anything...
+        } else {
+            if let tweet = self.tweetVc?.getTweet() {
+                self.tweets.insert(tweet, at: 0)
+                self.tweetTableView.reloadData()
+            }
         }
+ **/
     }
 
     func refreshControlAction(refreshControl: UIRefreshControl) {
         self.retrieveTimeline()
+    }
+    
+    @IBAction func unwindFromSegue(segue: UIStoryboardSegue) {
+        if let tweet = (segue.source as! ComposeViewController).postedTweet {
+            self.tweets.insert(tweet, at: 0)
+            self.tweetTableView.reloadData()
+        }
     }
 
 }
@@ -77,4 +93,8 @@ extension TimelineViewController: UITableViewDataSource {
         return 1
     }
     
+}
+
+protocol TweetProtocol {
+    func getTweet() -> Tweet?
 }

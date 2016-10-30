@@ -17,7 +17,9 @@ class ComposeViewController: UIViewController {
     @IBOutlet weak var statusTextView: UITextView!
     @IBOutlet weak var charRemainingLabel: UILabel!
     
-    let maxCharCount = 140 
+    let maxCharCount = 140
+    
+    var postedTweet: Tweet?
     
     var remainingCharCount = 0 {
         didSet {
@@ -35,12 +37,26 @@ class ComposeViewController: UIViewController {
         TwitterClient.sharedInstance.updateStatus(tweetToPost!) { (tweet: Tweet?, error: Error?) in
             if let tweet = tweet {
                 print("tweet posted \(tweet)")
+                self.postedTweet = tweet
+                self.performSegue(withIdentifier: "ComposeUnwindSegue", sender: self)
             }
             if let error = error {
                 print("tweet post error \(error)")
+                self.showAlert(errorTitle: "Error", errorString: error.localizedDescription)
             }
         }
     
+    }
+    
+    func showAlert(errorTitle: String, errorString: String) {
+        let alertController = UIAlertController(title: errorTitle, message: errorString, preferredStyle: .alert)
+        // create an OK action
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            //self.dismiss(animated: true, completion: nil)
+        }
+        // add the OK action to the alert controller
+        alertController.addAction(OKAction)
+        present(alertController, animated: true) {}
     }
     
     override func viewDidLoad() {
@@ -85,5 +101,11 @@ class ComposeViewController: UIViewController {
 extension ComposeViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         self.remainingCharCount = self.maxCharCount - textView.text.characters.count
+    }
+}
+
+extension ComposeViewController: TweetProtocol {
+    func getTweet() -> Tweet? {
+        return self.postedTweet
     }
 }
