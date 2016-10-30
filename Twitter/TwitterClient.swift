@@ -65,7 +65,6 @@ class TwitterClient: BDBOAuth1SessionManager {
                 }
                 storedCompletionHandler?(TwitterLoginStatus.success, nil)
                 self.verifyUser()
-                //self.getTimeline(completion: storedCompletionHandler!)
             }, failure:{ (error: Error?) in
                 print("error: \(error!.localizedDescription)")
                 storedCompletionHandler?(TwitterLoginStatus.failure, error)

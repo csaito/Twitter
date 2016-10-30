@@ -9,6 +9,7 @@ class User : NSObject {
     var profileImageUrl: String?
     var userName: String?
     var screenName: String?
+    var id : Int?
     var dictionary : NSDictionary?
     
     init(userDirectory: NSDictionary) {
@@ -16,27 +17,26 @@ class User : NSObject {
         self.profileImageUrl = userDirectory["profile_image_url"] as? String
         self.userName = userDirectory["name"] as? String
         self.screenName = userDirectory["screen_name"] as? String
+        self.id = userDirectory["id"] as? Int
     }
     
     static var currentUser: User? {
         get {
-            let defaults = UserDefaults.standard
-            let userData = defaults.object(forKey: "currentUserData") as? Data
-            if let userData = userData {
-                let dictonary = try!
-                    JSONSerialization.jsonObject(with: userData, options: [])
-                return User(userDirectory: dictonary as! NSDictionary)
-            } else {
-                return nil
+            let id = UserDefaults.standard.integer(forKey: "currentUserId")
+            print("got userId \(id)")
+            if id > 0 {
+                return User(userDirectory: NSDictionary())
             }
+            return nil
         }
         set(user) {
             let defaults = UserDefaults.standard
             if let user = user {
-                let data = try! JSONSerialization.data(withJSONObject: user.dictionary!, options: []);
-                defaults.set(data, forKey: "currentUserData")
+                print("storing userId \(user.id!)")
+                let id = user.id!
+                defaults.set(id, forKey: "currentUserId")
             } else {
-                defaults.set(nil, forKey: "currentUserData")
+                defaults.set(0, forKey: "currentUserId")
             }
             defaults.synchronize()
             
