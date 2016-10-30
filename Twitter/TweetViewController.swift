@@ -52,7 +52,7 @@ class TweetViewController: UIViewController {
             self.createdAtLabel.text = getFormattedDateString(tweet.createdAt as Date)
 
             self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
-            self.likeButton.isEnabled = !(tweet.favorited!)
+            self.likeButton.isHighlighted = tweet.favorited!
             self.retweetButton.isEnabled = !(tweet.retweeted!)
         }
         self.profileImageView.layer.cornerRadius = 5
@@ -65,6 +65,8 @@ class TweetViewController: UIViewController {
         self.postReplyButton.clipsToBounds = true
         self.hideKeyboardWhenTappedAround()
         self.replyTextView.delegate = self
+        self.likeButton.setBackgroundImage(UIImage(named: "love_n.png"), for: UIControlState.normal)
+        self.likeButton.setBackgroundImage(UIImage(named: "love-1.png"), for: UIControlState.highlighted)
     }
 
     override func didReceiveMemoryWarning() {
@@ -120,14 +122,29 @@ class TweetViewController: UIViewController {
     }
     
     @IBAction func likeButtonPressed(_ sender: AnyObject) {
-        TwitterClient.sharedInstance.likeStatus(self.tweet!.id!) { (tweet: Tweet?, error: Error?) in
-            if let tweet = tweet {
-                self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
-                self.likeButton.isEnabled = !(tweet.favorited!)
+        if (self.tweet!.favorited == true) {
+            TwitterClient.sharedInstance.dislikeStatus(self.tweet!.id!) { (tweet: Tweet?, error: Error?) in
+                if let tweet = tweet {
+                    self.tweet = tweet
+                    self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
+                    self.likeButton.isHighlighted = false
+                }
+                if let error = error {
+                    print("tweet post error \(error)")
+                    self.showAlert(errorTitle: "Couldn't destroy favorite", errorString: error.localizedDescription)
+                }
             }
-            if let error = error {
-                print("tweet post error \(error)")
-                self.showAlert(errorTitle: "Couldn't set favorite", errorString: error.localizedDescription)
+        } else {
+            TwitterClient.sharedInstance.likeStatus(self.tweet!.id!) { (tweet: Tweet?, error: Error?) in
+                if let tweet = tweet {
+                    self.tweet = tweet
+                    self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
+                    self.likeButton.isHighlighted = true
+                }
+                if let error = error {
+                    print("tweet post error \(error)")
+                    self.showAlert(errorTitle: "Couldn't set favorite", errorString: error.localizedDescription)
+                }
             }
         }
     }

@@ -154,6 +154,21 @@ class TwitterClient: BDBOAuth1SessionManager {
         });
     }
     
+    func dislikeStatus(_ tweetId : Int, completion: @escaping (Tweet?, Error?) -> Void) -> Void {
+        let param: NSDictionary = [
+            "id" : tweetId
+        ]
+        self.post("1.1/favorites/destroy.json", parameters: param, success:
+            {(task:URLSessionDataTask, response:Any?) -> Void in
+                let tweet = response as! NSDictionary
+                print("post success \(tweet)")
+                completion(Tweet(tweetDictionary: tweet), nil)
+            }, failure: { (task:URLSessionDataTask?, error:Error) -> Void in
+                print("error: \(error.localizedDescription)")
+                completion(nil, error)
+        });
+    }
+    
     func retweetStatus(_ tweetId : Int, completion: @escaping (Tweet?, Error?) -> Void) -> Void {
         let param: NSDictionary = [
             "id" : tweetId

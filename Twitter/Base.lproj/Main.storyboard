@@ -174,7 +174,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K1F-r3-NRw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1593" y="464"/>
+            <point key="canvasLocation" x="1592.8" y="463.71814092953525"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="ntN-aX-oke">
@@ -384,16 +384,23 @@
                                             <action selector="replyButtonPressed:" destination="jvA-mX-uMG" eventType="touchUpInside" id="7l8-NT-EXr"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EfI-Lm-Tg8">
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="MMT-wC-Ife"/>
-                                            <constraint firstAttribute="height" constant="20" id="nqj-cS-lDA"/>
-                                        </constraints>
-                                        <state key="normal" title="Button" image="love"/>
-                                        <connections>
-                                            <action selector="likeButtonPressed:" destination="jvA-mX-uMG" eventType="touchUpInside" id="XRH-fm-znb"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hqF-Og-znJ">
+                                        <frame key="frameInset" minX="319" minY="5" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EfI-Lm-Tg8">
+                                                <frame key="frameInset" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="MMT-wC-Ife"/>
+                                                    <constraint firstAttribute="height" constant="20" id="nqj-cS-lDA"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" backgroundImage="love_n"/>
+                                                <connections>
+                                                    <action selector="likeButtonPressed:" destination="jvA-mX-uMG" eventType="touchUpInside" id="XRH-fm-znb"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -401,9 +408,7 @@
                                     <constraint firstAttribute="height" constant="30" id="LkC-8N-a74"/>
                                     <constraint firstItem="s2w-7B-5Py" firstAttribute="centerY" secondItem="cza-43-6xD" secondAttribute="centerY" id="afq-0M-Rt2"/>
                                     <constraint firstItem="s2w-7B-5Py" firstAttribute="centerX" secondItem="cza-43-6xD" secondAttribute="centerX" id="cHq-hW-ANJ"/>
-                                    <constraint firstItem="EfI-Lm-Tg8" firstAttribute="centerY" secondItem="cza-43-6xD" secondAttribute="centerY" id="qm1-tZ-eV6"/>
                                     <constraint firstItem="Qh9-kF-ac7" firstAttribute="leading" secondItem="cza-43-6xD" secondAttribute="leading" constant="20" id="tIu-aH-k9r"/>
-                                    <constraint firstAttribute="trailing" secondItem="EfI-Lm-Tg8" secondAttribute="trailing" constant="20" id="vQU-y9-mdF"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8xC-CA-OnE">
@@ -541,7 +546,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="love" width="512" height="512"/>
+        <image name="love_n" width="233" height="216"/>
         <image name="reply" width="512" height="512"/>
         <image name="retweet" width="512" height="512"/>
     </resources>
