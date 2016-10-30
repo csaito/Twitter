@@ -10,14 +10,14 @@ let baseUrlString = "https://api.twitter.com"
 let consumerKey = "c5NUWp3Mc4ixfqtqneEcHNs9Q"
 let consumerSecret = "8qjdoXPxS8yLnLO8px0FpIVk42MsskYgFvtv8F9saA2kGiCICO"
 
-enum TwitterLoginStatus: Int {
+enum TwitterClientStatus: Int {
     case success = 0, failure
 }
 
 
 class TwitterClient: BDBOAuth1SessionManager {
     
-    var loginCompletionHandler: ((TwitterLoginStatus, Error?) -> Void)?
+    var loginCompletionHandler: ((TwitterClientStatus, Error?) -> Void)?
     
     static let sharedInstance = TwitterClient(baseURL: URL(string: baseUrlString)!, consumerKey: consumerKey, consumerSecret: consumerSecret)
     
@@ -31,10 +31,10 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     override init(baseURL: URL, consumerKey key: String!, consumerSecret secret: String!) {
         super.init(baseURL: baseURL, consumerKey: key, consumerSecret: secret);
-        self.deauthorize()
+        //self.deauthorize()
     }
     
-    func login(login: String, completion: @escaping (TwitterLoginStatus, Error?) -> Void) -> Void {
+    func login(login: String, completion: @escaping (TwitterClientStatus, Error?) -> Void) -> Void {
         
         //completion(TwitterLoginStatus.success, nil)
         self.fetchRequestToken(withPath: "oauth/request_token", method: "GET",
@@ -47,7 +47,7 @@ class TwitterClient: BDBOAuth1SessionManager {
                                             }
             }, failure: { (error: Error? ) -> Void in
                 print("error \(error)")
-                completion(TwitterLoginStatus.failure, error)
+                completion(TwitterClientStatus.failure, error)
         })
  
     }
@@ -63,11 +63,11 @@ class TwitterClient: BDBOAuth1SessionManager {
                     let status = self.requestSerializer.saveAccessToken(token)
                     print("keyChain storage status \(status)")
                 }
-                storedCompletionHandler?(TwitterLoginStatus.success, nil)
+                storedCompletionHandler?(TwitterClientStatus.success, nil)
                 self.verifyUser()
             }, failure:{ (error: Error?) in
                 print("error: \(error!.localizedDescription)")
-                storedCompletionHandler?(TwitterLoginStatus.failure, error)
+                storedCompletionHandler?(TwitterClientStatus.failure, error)
         })
     }
     
@@ -97,5 +97,20 @@ class TwitterClient: BDBOAuth1SessionManager {
                 print("error: \(error.localizedDescription)")
                 completion([Tweet](), error)
         })
+    }
+    
+    func updateStatus(_ tweet : String, completion: @escaping (Tweet?, Error?) -> Void) -> Void {
+        let param: NSDictionary = [
+            "status" : tweet
+        ]
+        self.post("1.1/statuses/update.json", parameters: param, success:
+            {(task:URLSessionDataTask, response:Any?) -> Void in
+                let tweet = response as! NSDictionary
+                print("post success \(tweet)")
+                completion(Tweet(tweetDictionary: tweet), nil)
+            }, failure: { (task:URLSessionDataTask?, error:Error) -> Void in
+                print("error: \(error.localizedDescription)")
+                completion(nil, error)
+        });
     }
 }

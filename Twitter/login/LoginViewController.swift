@@ -22,8 +22,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginClicked(_ sender: AnyObject) {
         TwitterClient.sharedInstance.login(login: "chihiro.saito@gmail.com", completion: {
-            (status: TwitterLoginStatus, error: Error?) -> Void in
-            if (status == TwitterLoginStatus.success) {
+            (status: TwitterClientStatus, error: Error?) -> Void in
+            if (status == TwitterClientStatus.success) {
                 print("successfully logged in")
                 self.performSegue(withIdentifier: "DisplayTimelineSegue", sender: self)
             } else {

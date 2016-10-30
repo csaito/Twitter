@@ -48,6 +48,12 @@ class TimelineViewController: UIViewController {
         });
     }
     
+    let item = "ComposeUpdateSegue"
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ComposeUpdateSegue" {
+            // Don't really have to do anything...
+        }
+    }
 
     func refreshControlAction(refreshControl: UIRefreshControl) {
         self.retrieveTimeline()

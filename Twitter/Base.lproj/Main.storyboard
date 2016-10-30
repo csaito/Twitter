@@ -161,6 +161,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="New" id="Oih-9r-2Va">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="zfy-To-jQy" kind="presentation" identifier="ComposeUpdateSegue" id="F8b-x3-cek"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -169,7 +172,91 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K1F-r3-NRw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1688.8" y="34.632683658170919"/>
+            <point key="canvasLocation" x="1593" y="464"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="ntN-aX-oke">
+            <objects>
+                <viewController id="6wX-9D-H2X" customClass="ComposeViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1gP-EO-H8N"/>
+                        <viewControllerLayoutGuide type="bottom" id="jkv-dd-hMY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FDI-zx-iDa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ter-N4-cBs">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="agI-rN-nyc"/>
+                                    <constraint firstAttribute="height" constant="55" id="pxs-wo-IeH"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YL3-yy-cTX">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rgr-Zf-XS6">
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6M6-C9-qgm">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="255" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUp-6m-diL">
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jkv-dd-hMY" firstAttribute="top" secondItem="6M6-C9-qgm" secondAttribute="bottom" constant="8" id="3Qo-ke-32E"/>
+                            <constraint firstAttribute="trailing" secondItem="Rgr-Zf-XS6" secondAttribute="trailing" constant="8" id="3jh-qu-OCR"/>
+                            <constraint firstItem="YL3-yy-cTX" firstAttribute="top" secondItem="1gP-EO-H8N" secondAttribute="bottom" constant="8" id="9Cv-MQ-xLW"/>
+                            <constraint firstAttribute="trailing" secondItem="IUp-6m-diL" secondAttribute="trailing" constant="8" id="BD9-PB-Jz4"/>
+                            <constraint firstItem="6M6-C9-qgm" firstAttribute="leading" secondItem="FDI-zx-iDa" secondAttribute="leading" constant="8" id="GJ8-3a-b5F"/>
+                            <constraint firstItem="6M6-C9-qgm" firstAttribute="top" secondItem="Ter-N4-cBs" secondAttribute="bottom" constant="8" id="OHE-Em-9dT"/>
+                            <constraint firstItem="Ter-N4-cBs" firstAttribute="leading" secondItem="FDI-zx-iDa" secondAttribute="leading" constant="5" id="Oee-Pb-ZY1"/>
+                            <constraint firstItem="6M6-C9-qgm" firstAttribute="top" secondItem="IUp-6m-diL" secondAttribute="bottom" constant="5" id="Xb2-zf-kF6"/>
+                            <constraint firstItem="Ter-N4-cBs" firstAttribute="top" secondItem="1gP-EO-H8N" secondAttribute="bottom" constant="8" id="cfB-Ku-U2w"/>
+                            <constraint firstItem="Rgr-Zf-XS6" firstAttribute="leading" secondItem="Ter-N4-cBs" secondAttribute="trailing" constant="8" id="gf2-w3-kHx"/>
+                            <constraint firstItem="YL3-yy-cTX" firstAttribute="leading" secondItem="Ter-N4-cBs" secondAttribute="trailing" constant="5" id="taa-UY-NUE"/>
+                            <constraint firstItem="Rgr-Zf-XS6" firstAttribute="top" secondItem="YL3-yy-cTX" secondAttribute="bottom" constant="8" id="uB0-bp-7Ww"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YL3-yy-cTX" secondAttribute="trailing" constant="8" id="url-Lq-j3F"/>
+                            <constraint firstAttribute="trailing" secondItem="6M6-C9-qgm" secondAttribute="trailing" constant="8" id="xKc-Qw-aNm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="mfV-wn-aV4">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="mhy-ib-I3f">
+                            <color key="tintColor" red="0.10943647469999999" green="0.63020360470000003" blue="0.94768673179999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="cancelPressed:" destination="6wX-9D-H2X" id="6Jz-Ak-EU0"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="oYK-8M-4yd">
+                            <color key="tintColor" red="0.10943647469999999" green="0.63020360470000003" blue="0.94768673179999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="tweetPressed:" destination="6wX-9D-H2X" id="gxR-1e-dh4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="charRemainingLabel" destination="IUp-6m-diL" id="Cjj-tW-llr"/>
+                        <outlet property="nameLabel" destination="Rgr-Zf-XS6" id="iB9-Cr-U7F"/>
+                        <outlet property="profileImageView" destination="Ter-N4-cBs" id="qGz-A6-oXE"/>
+                        <outlet property="screenNameLabel" destination="YL3-yy-cTX" id="i7N-yh-mRJ"/>
+                        <outlet property="statusTextView" destination="6M6-C9-qgm" id="p2H-5z-5LT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zwp-Ky-pJC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2135" y="-189"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YyM-ow-PSi">
@@ -189,6 +276,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qe-BB-naY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="34.632683658170919"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Qb9-1M-cZI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zfy-To-jQy" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ck1-bb-q3j">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6wX-9D-H2X" kind="relationship" relationship="rootViewController" id="9eX-uJ-x7b"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GtR-8A-gpW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2772" y="504"/>
         </scene>
     </scenes>
 </document>
