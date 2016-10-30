@@ -15,6 +15,8 @@ class Tweet : NSObject {
     var userName: String?
     var screenName: String?
     var createdAt: NSDate
+    var retweetCount: Int?
+    var favoritesCount: Int?
     
     init(tweetDictionary: NSDictionary) {
         print("\(tweetDictionary)")
@@ -29,6 +31,9 @@ class Tweet : NSObject {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         self.createdAt = formatter.date(from: tweetDictionary["created_at"] as! String)! as NSDate
+        
+        self.retweetCount = tweetDictionary["retweet_count"] as? Int
+        self.favoritesCount = tweetDictionary["favorite_count"] as? Int
     }
     
     // Creates a text representation of a tweet    

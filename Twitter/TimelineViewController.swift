@@ -49,6 +49,11 @@ class TimelineViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ViewTweetSegue" {
+            let navigationController = segue.destination as! UINavigationController
+            let tweetViewController = navigationController.viewControllers[0] as! TweetViewController
+            tweetViewController.tweet = (sender as! TweetTableViewCell).tweet
+        }
         /**
         if segue.identifier == "ComposeUpdateSegue" {
             let navigationController = segue.destination as! UINavigationController
