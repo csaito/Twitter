@@ -364,34 +364,46 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cza-43-6xD">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet" translatesAutoresizingMaskIntoConstraints="NO" id="LAb-C2-BXR">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qh9-kF-ac7">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="7EJ-Ig-Zhh"/>
-                                            <constraint firstAttribute="width" constant="20" id="yv3-bK-bHv"/>
+                                            <constraint firstAttribute="height" constant="20" id="1is-ss-atO"/>
+                                            <constraint firstAttribute="width" constant="20" id="klY-eH-ikh"/>
                                         </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="love.png" translatesAutoresizingMaskIntoConstraints="NO" id="o9e-LD-J5q">
+                                        <state key="normal" title="Button" image="retweet"/>
+                                        <connections>
+                                            <action selector="retweetButtonPressed:" destination="jvA-mX-uMG" eventType="touchUpInside" id="cH8-GV-f4T"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2w-7B-5Py">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="TLe-TC-ha7"/>
-                                            <constraint firstAttribute="height" constant="20" id="Uej-En-zce"/>
+                                            <constraint firstAttribute="height" constant="20" id="XFG-kf-jK4"/>
+                                            <constraint firstAttribute="width" constant="20" id="sxq-q7-Z40"/>
                                         </constraints>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reply" translatesAutoresizingMaskIntoConstraints="NO" id="PHb-QS-0hw">
+                                        <state key="normal" title="Button" image="reply"/>
+                                        <connections>
+                                            <action selector="replyButtonPressed:" destination="jvA-mX-uMG" eventType="touchUpInside" id="RuN-rv-Jf3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EfI-Lm-Tg8">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="5R6-oP-f45"/>
-                                            <constraint firstAttribute="height" constant="20" id="N5X-rx-lBF"/>
+                                            <constraint firstAttribute="width" constant="20" id="MMT-wC-Ife"/>
+                                            <constraint firstAttribute="height" constant="20" id="nqj-cS-lDA"/>
                                         </constraints>
-                                    </imageView>
+                                        <state key="normal" title="Button" image="love"/>
+                                        <connections>
+                                            <action selector="likeButtonPressed:" destination="jvA-mX-uMG" eventType="touchUpInside" id="XRH-fm-znb"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="LAb-C2-BXR" firstAttribute="centerY" secondItem="cza-43-6xD" secondAttribute="centerY" id="0g9-10-sKD"/>
-                                    <constraint firstItem="PHb-QS-0hw" firstAttribute="centerY" secondItem="cza-43-6xD" secondAttribute="centerY" id="D9n-NO-0xR"/>
-                                    <constraint firstItem="PHb-QS-0hw" firstAttribute="leading" secondItem="cza-43-6xD" secondAttribute="leading" constant="20" id="DzI-cK-jDL"/>
+                                    <constraint firstItem="Qh9-kF-ac7" firstAttribute="centerY" secondItem="cza-43-6xD" secondAttribute="centerY" id="GWG-nQ-VfJ"/>
                                     <constraint firstAttribute="height" constant="30" id="LkC-8N-a74"/>
-                                    <constraint firstItem="LAb-C2-BXR" firstAttribute="centerX" secondItem="cza-43-6xD" secondAttribute="centerX" id="YAO-k7-Br5"/>
-                                    <constraint firstItem="o9e-LD-J5q" firstAttribute="centerY" secondItem="cza-43-6xD" secondAttribute="centerY" id="ahR-os-gt2"/>
-                                    <constraint firstAttribute="trailing" secondItem="o9e-LD-J5q" secondAttribute="trailing" constant="20" id="eK9-Yt-gDn"/>
+                                    <constraint firstItem="s2w-7B-5Py" firstAttribute="centerY" secondItem="cza-43-6xD" secondAttribute="centerY" id="afq-0M-Rt2"/>
+                                    <constraint firstItem="s2w-7B-5Py" firstAttribute="centerX" secondItem="cza-43-6xD" secondAttribute="centerX" id="cHq-hW-ANJ"/>
+                                    <constraint firstItem="EfI-Lm-Tg8" firstAttribute="centerY" secondItem="cza-43-6xD" secondAttribute="centerY" id="qm1-tZ-eV6"/>
+                                    <constraint firstItem="Qh9-kF-ac7" firstAttribute="leading" secondItem="cza-43-6xD" secondAttribute="leading" constant="20" id="tIu-aH-k9r"/>
+                                    <constraint firstAttribute="trailing" secondItem="EfI-Lm-Tg8" secondAttribute="trailing" constant="20" id="vQU-y9-mdF"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -432,10 +444,13 @@
                     <connections>
                         <outlet property="createdAtLabel" destination="MHb-6G-9dk" id="8hG-gV-0gy"/>
                         <outlet property="iconsView" destination="cza-43-6xD" id="6v8-5F-TdX"/>
+                        <outlet property="likeButton" destination="EfI-Lm-Tg8" id="QPb-9e-Ha6"/>
                         <outlet property="nameLabel" destination="snK-oZ-6sC" id="3rN-m0-e0w"/>
                         <outlet property="profileImageView" destination="J2S-Oh-1vi" id="3as-UI-U6I"/>
+                        <outlet property="replyButton" destination="s2w-7B-5Py" id="OVV-Qa-Wf7"/>
                         <outlet property="retweetAndLikeLabel" destination="tz6-wj-kk0" id="c5O-eD-QpQ"/>
                         <outlet property="retweetAndLikeView" destination="b0m-eq-LV6" id="fvR-KA-YBD"/>
+                        <outlet property="retweetButton" destination="Qh9-kF-ac7" id="JeA-8e-6de"/>
                         <outlet property="screenNameLabel" destination="SjE-8n-cuq" id="GYp-1t-Nbh"/>
                         <outlet property="tweetTextView" destination="vfO-SZ-VDF" id="rwi-Hf-aWN"/>
                     </connections>
@@ -465,7 +480,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="love.png" width="512" height="512"/>
+        <image name="love" width="512" height="512"/>
         <image name="reply" width="512" height="512"/>
         <image name="retweet" width="512" height="512"/>
     </resources>

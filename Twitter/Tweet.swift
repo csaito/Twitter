@@ -17,6 +17,9 @@ class Tweet : NSObject {
     var createdAt: NSDate
     var retweetCount: Int?
     var favoritesCount: Int?
+    var id: Int?
+    var favorited: Bool?
+    var retweeted: Bool?
     
     init(tweetDictionary: NSDictionary) {
         print("\(tweetDictionary)")
@@ -26,14 +29,15 @@ class Tweet : NSObject {
             self.screenName = (user as! NSDictionary)["screen_name"] as? String
         }
         self.tweetText = tweetDictionary["text"] as? String
-        //self.timestamp = tweetDictionary["created_at"] as? String
-        
         let formatter = DateFormatter()
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         self.createdAt = formatter.date(from: tweetDictionary["created_at"] as! String)! as NSDate
-        
         self.retweetCount = tweetDictionary["retweet_count"] as? Int
         self.favoritesCount = tweetDictionary["favorite_count"] as? Int
+        self.id = tweetDictionary["id"] as? Int
+        self.favorited = tweetDictionary["favorited"] as? Bool
+        self.retweeted = tweetDictionary["retweeted"] as? Bool
+
     }
     
     // Creates a text representation of a tweet    
@@ -41,7 +45,8 @@ class Tweet : NSObject {
         return "[Name: \(self.unwrapOrDefault(self.userName))]" +
             "\n\t[tweetText: \(self.unwrapOrDefault(self.tweetText))]" +
             "\n\t[timestamp: \(self.unwrapOrDefault(self.timestamp))]" +
-            "\n\t[profileImageUrl: \(self.unwrapOrDefault(self.profileImageUrl))]"
+            "\n\t[profileImageUrl: \(self.unwrapOrDefault(self.profileImageUrl))]" +
+            "\n\t[id: \(self.id))]"
     }
     
     func unwrapOrDefault(_ optionalStr: String?) -> String {

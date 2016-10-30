@@ -87,6 +87,7 @@ extension TimelineViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell", for: indexPath) as! TweetTableViewCell
         cell.tweet = self.tweets[indexPath.row]
+        print("tweet \(cell.tweet)");
         return cell
     }
     

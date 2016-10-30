@@ -113,4 +113,50 @@ class TwitterClient: BDBOAuth1SessionManager {
                 completion(nil, error)
         });
     }
+    
+    func likeStatus(_ tweetId : Int, completion: @escaping (Tweet?, Error?) -> Void) -> Void {
+        let param: NSDictionary = [
+            "id" : tweetId
+        ]
+        self.post("1.1/favorites/create.json", parameters: param, success:
+            {(task:URLSessionDataTask, response:Any?) -> Void in
+                let tweet = response as! NSDictionary
+                print("post success \(tweet)")
+                completion(Tweet(tweetDictionary: tweet), nil)
+            }, failure: { (task:URLSessionDataTask?, error:Error) -> Void in
+                print("error: \(error.localizedDescription)")
+                completion(nil, error)
+        });
+    }
+    
+    func retweetStatus(_ tweetId : Int, completion: @escaping (Tweet?, Error?) -> Void) -> Void {
+        let param: NSDictionary = [
+            "id" : tweetId
+        ]
+        self.post("1.1/statuses/retweet/\(tweetId).json", parameters: param, success:
+            {(task:URLSessionDataTask, response:Any?) -> Void in
+                let tweet = response as! NSDictionary
+                print("post success \(tweet)")
+                completion(Tweet(tweetDictionary: tweet), nil)
+            }, failure: { (task:URLSessionDataTask?, error:Error) -> Void in
+                print("error: \(error.localizedDescription)")
+                completion(nil, error)
+        });
+    }
+    
+    func replyToStatus(_ tweet : String, tweetId: Int, completion: @escaping (Tweet?, Error?) -> Void) -> Void {
+        let param: NSDictionary = [
+            "status" : tweet,
+            "in_reply_to_status_id": tweetId
+        ]
+        self.post("1.1/statuses/update.json", parameters: param, success:
+            {(task:URLSessionDataTask, response:Any?) -> Void in
+                let tweet = response as! NSDictionary
+                print("post success \(tweet)")
+                completion(Tweet(tweetDictionary: tweet), nil)
+            }, failure: { (task:URLSessionDataTask?, error:Error) -> Void in
+                print("error: \(error.localizedDescription)")
+                completion(nil, error)
+        });
+    }
 }

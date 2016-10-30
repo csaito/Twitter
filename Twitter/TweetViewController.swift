@@ -19,6 +19,10 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var retweetAndLikeLabel: UILabel!
     @IBOutlet weak var iconsView: UIView!
     
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
+    
     var tweet: Tweet?
     
     override func viewDidLoad() {
@@ -35,6 +39,8 @@ class TweetViewController: UIViewController {
             self.tweetTextView.text = tweet.tweetText
             self.createdAtLabel.text = getFormattedDateString(tweet.createdAt as Date)
             self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
+            self.likeButton.isEnabled = !(tweet.favorited!)
+            self.retweetButton.isEnabled = !(tweet.retweeted!)
         }
         self.profileImageView.layer.cornerRadius = 5
         self.profileImageView.clipsToBounds = true;
@@ -80,7 +86,45 @@ class TweetViewController: UIViewController {
         textView.frame = newFrame;
     }
     
-
+    @IBAction func retweetButtonPressed(_ sender: AnyObject) {
+        TwitterClient.sharedInstance.retweetStatus(self.tweet!.id!) { (tweet: Tweet?, error: Error?) in
+            if let tweet = tweet {
+                print("retweet succeeded \(tweet)")
+                self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
+                self.retweetButton.isEnabled = !(tweet.retweeted!)
+            }
+            if let error = error {
+                print("tweet post error \(error)")
+                self.showAlert(errorTitle: "Couldn't set favorite", errorString: error.localizedDescription)
+            }
+        }
+    }
+    
+    @IBAction func likeButtonPressed(_ sender: AnyObject) {
+        TwitterClient.sharedInstance.likeStatus(self.tweet!.id!) { (tweet: Tweet?, error: Error?) in
+            if let tweet = tweet {
+                print("like succeeded \(tweet)")
+                self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
+                self.likeButton.isEnabled = !(tweet.favorited!)
+            }
+            if let error = error {
+                print("tweet post error \(error)")
+                self.showAlert(errorTitle: "Couldn't set favorite", errorString: error.localizedDescription)
+            }
+        }
+    }
+    
+    func showAlert(errorTitle: String, errorString: String) {
+        let alertController = UIAlertController(title: errorTitle, message: errorString, preferredStyle: .alert)
+        // create an OK action
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            //self.dismiss(animated: true, completion: nil)
+        }
+        // add the OK action to the alert controller
+        alertController.addAction(OKAction)
+        present(alertController, animated: true) {}
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -92,3 +136,4 @@ class TweetViewController: UIViewController {
     */
 
 }
+
