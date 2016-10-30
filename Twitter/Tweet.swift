@@ -14,6 +14,7 @@ class Tweet : NSObject {
     var profileImageUrl: String?
     var userName: String?
     var screenName: String?
+    var createdAt: NSDate
     
     init(tweetDictionary: NSDictionary) {
         print("\(tweetDictionary)")
@@ -23,7 +24,11 @@ class Tweet : NSObject {
             self.screenName = (user as! NSDictionary)["screen_name"] as? String
         }
         self.tweetText = tweetDictionary["text"] as? String
-        self.timestamp = tweetDictionary["created_at"] as? String
+        //self.timestamp = tweetDictionary["created_at"] as? String
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
+        self.createdAt = formatter.date(from: tweetDictionary["created_at"] as! String)! as NSDate
     }
     
     // Creates a text representation of a tweet    
@@ -38,14 +43,57 @@ class Tweet : NSObject {
         return (optionalStr ?? "").isEmpty ? "" : optionalStr!
     }
     
+    static let MINUTE = 60;
+    static let HOUR = (MINUTE * 60);
+    static let DAY = (HOUR * 24);
+    static let WEEK = (DAY * 7);
+    static let MONTH = (DAY * 31);
+    static let YEAR = (DAY * 365);
+    
     func getTimestampForDisplay() -> String {
-        // Diff the current time with tweet created time.
-        // 1. If diff is less than a minute - return seconds
-        // 2. If diff is less than an hour - return minutes
-        // 3. If diff is less than a day - return hours
-        // 4. If diff is less than 3 days - return date
-        // Otherwise retun dd mm
         
-        return "14h" // FIXME
+        let now = NSDate()
+        let secondsSinceNow = Int(now.timeIntervalSince(self.createdAt as Date))
+        
+        var prefix = 0
+        var suffix = ""
+        
+        // Seconds
+        if (secondsSinceNow < Tweet.MINUTE) {
+            prefix = secondsSinceNow;
+            suffix = "s";
+        }
+            // Minute
+        else if (secondsSinceNow < Tweet.HOUR) {
+            prefix = secondsSinceNow / Tweet.MINUTE;
+            suffix = "m";
+        }
+            // Hour
+        else if (secondsSinceNow < Tweet.DAY) {
+            prefix = secondsSinceNow / Tweet.HOUR;
+            suffix = "h";
+        }
+            // Day
+        else if (secondsSinceNow < Tweet.WEEK) {
+            prefix = secondsSinceNow / Tweet.DAY;
+            suffix = "d";
+        }
+            // Week
+        else if (secondsSinceNow < Tweet.MONTH) {
+            prefix = secondsSinceNow / Tweet.WEEK;
+            suffix = "w";
+        }
+            // Month
+        else if (secondsSinceNow < Tweet.YEAR) {
+            prefix = secondsSinceNow / Tweet.MONTH;
+            suffix = "mo";
+        }
+            // Year
+        else {
+            prefix = secondsSinceNow / Tweet.YEAR;
+            suffix = "y";
+        }
+        
+        return "\(prefix) \(suffix)"
     }
 }
