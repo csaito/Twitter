@@ -381,7 +381,7 @@
                                         </constraints>
                                         <state key="normal" title="Button" image="reply"/>
                                         <connections>
-                                            <action selector="replyButtonPressed:" destination="jvA-mX-uMG" eventType="touchUpInside" id="RuN-rv-Jf3"/>
+                                            <action selector="replyButtonPressed:" destination="jvA-mX-uMG" eventType="touchUpInside" id="7l8-NT-EXr"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EfI-Lm-Tg8">
@@ -406,14 +406,73 @@
                                     <constraint firstAttribute="trailing" secondItem="EfI-Lm-Tg8" secondAttribute="trailing" constant="20" id="vQU-y9-mdF"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8xC-CA-OnE">
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oBc-Hj-znp">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="wZv-B6-wrF"/>
+                                        </constraints>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2F-YP-dVt">
+                                        <color key="backgroundColor" red="0.10943647469999999" green="0.63020360470000003" blue="0.94768673179999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="hv9-Qb-EWj"/>
+                                        </constraints>
+                                        <state key="normal" title="Reply">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="postReplyPressed:" destination="jvA-mX-uMG" eventType="touchUpInside" id="aAP-YV-9Sp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAg-Kf-l5w">
+                                        <color key="backgroundColor" red="0.10943647469999999" green="0.63020360470000003" blue="0.94768673179999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="Lwf-nl-UUa"/>
+                                        </constraints>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="replyCancelPressed:" destination="jvA-mX-uMG" eventType="touchUpInside" id="hp0-1W-haY"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="144" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpg-jX-KR4">
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="oBc-Hj-znp" firstAttribute="leading" secondItem="8xC-CA-OnE" secondAttribute="leading" constant="8" id="Cpb-TA-RQt"/>
+                                    <constraint firstItem="zAg-Kf-l5w" firstAttribute="top" secondItem="oBc-Hj-znp" secondAttribute="bottom" constant="8" id="I6a-OM-QEO"/>
+                                    <constraint firstAttribute="trailing" secondItem="gpg-jX-KR4" secondAttribute="trailing" constant="8" id="SBZ-Xz-E14"/>
+                                    <constraint firstAttribute="trailing" secondItem="oBc-Hj-znp" secondAttribute="trailing" constant="8" id="Tcv-yB-nob"/>
+                                    <constraint firstItem="M2F-YP-dVt" firstAttribute="leading" secondItem="zAg-Kf-l5w" secondAttribute="trailing" constant="14" id="Vdq-8t-49O"/>
+                                    <constraint firstItem="M2F-YP-dVt" firstAttribute="top" secondItem="oBc-Hj-znp" secondAttribute="bottom" constant="8" id="WAy-tx-EZa"/>
+                                    <constraint firstItem="oBc-Hj-znp" firstAttribute="top" secondItem="gpg-jX-KR4" secondAttribute="bottom" constant="5" id="Wdc-9i-2gq"/>
+                                    <constraint firstAttribute="bottom" secondItem="zAg-Kf-l5w" secondAttribute="bottom" constant="8" id="hx2-qM-PR9"/>
+                                    <constraint firstItem="gpg-jX-KR4" firstAttribute="top" secondItem="8xC-CA-OnE" secondAttribute="top" constant="8" id="qIc-hm-a6v"/>
+                                    <constraint firstAttribute="bottom" secondItem="M2F-YP-dVt" secondAttribute="bottom" constant="8" id="xuy-l1-2vb"/>
+                                    <constraint firstAttribute="trailing" secondItem="M2F-YP-dVt" secondAttribute="trailing" constant="8" id="yCt-hP-Cjj"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="b0m-eq-LV6" firstAttribute="leading" secondItem="jd6-GC-diJ" secondAttribute="leading" constant="8" id="0rR-KK-9VW"/>
                             <constraint firstItem="b0m-eq-LV6" firstAttribute="top" secondItem="MHb-6G-9dk" secondAttribute="bottom" constant="4" id="5qn-fh-27V"/>
                             <constraint firstAttribute="trailing" secondItem="cza-43-6xD" secondAttribute="trailing" constant="8" id="9Ul-73-Ucl"/>
+                            <constraint firstItem="8xC-CA-OnE" firstAttribute="leading" secondItem="jd6-GC-diJ" secondAttribute="leading" id="FLT-lt-fOM"/>
+                            <constraint firstAttribute="trailing" secondItem="8xC-CA-OnE" secondAttribute="trailing" id="GfW-dn-ycc"/>
                             <constraint firstAttribute="trailing" secondItem="SjE-8n-cuq" secondAttribute="trailing" constant="8" id="HO7-mm-NHh"/>
                             <constraint firstItem="MHb-6G-9dk" firstAttribute="leading" secondItem="jd6-GC-diJ" secondAttribute="leadingMargin" id="LGy-2D-WfG"/>
+                            <constraint firstItem="8xC-CA-OnE" firstAttribute="top" secondItem="cza-43-6xD" secondAttribute="bottom" constant="10" id="P4c-Qx-Zy7"/>
                             <constraint firstItem="MHb-6G-9dk" firstAttribute="top" secondItem="vfO-SZ-VDF" secondAttribute="bottom" constant="8" symbolic="YES" id="VrL-YV-7PQ"/>
                             <constraint firstItem="SjE-8n-cuq" firstAttribute="leading" secondItem="J2S-Oh-1vi" secondAttribute="trailing" constant="8" id="XFd-hN-pO8"/>
                             <constraint firstAttribute="trailing" secondItem="b0m-eq-LV6" secondAttribute="trailing" constant="8" id="ZY5-h1-ADI"/>
@@ -437,17 +496,19 @@
                                 <segue destination="aHd-bk-WRD" kind="show" id="2wZ-Fc-Vmf"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Reply" id="cDZ-pX-AoD">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="createdAtLabel" destination="MHb-6G-9dk" id="8hG-gV-0gy"/>
                         <outlet property="iconsView" destination="cza-43-6xD" id="6v8-5F-TdX"/>
                         <outlet property="likeButton" destination="EfI-Lm-Tg8" id="QPb-9e-Ha6"/>
                         <outlet property="nameLabel" destination="snK-oZ-6sC" id="3rN-m0-e0w"/>
+                        <outlet property="postReplyButton" destination="M2F-YP-dVt" id="Szt-D3-bmu"/>
                         <outlet property="profileImageView" destination="J2S-Oh-1vi" id="3as-UI-U6I"/>
+                        <outlet property="remainingCharLabel" destination="gpg-jX-KR4" id="M5C-j8-pu5"/>
                         <outlet property="replyButton" destination="s2w-7B-5Py" id="OVV-Qa-Wf7"/>
+                        <outlet property="replyCancelButton" destination="zAg-Kf-l5w" id="i7L-g8-Y1l"/>
+                        <outlet property="replyTextView" destination="oBc-Hj-znp" id="ANE-IC-Mde"/>
+                        <outlet property="replyView" destination="8xC-CA-OnE" id="Yt4-U6-TNg"/>
                         <outlet property="retweetAndLikeLabel" destination="tz6-wj-kk0" id="c5O-eD-QpQ"/>
                         <outlet property="retweetAndLikeView" destination="b0m-eq-LV6" id="fvR-KA-YBD"/>
                         <outlet property="retweetButton" destination="Qh9-kF-ac7" id="JeA-8e-6de"/>

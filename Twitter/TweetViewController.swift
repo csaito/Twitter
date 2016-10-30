@@ -22,8 +22,20 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var replyView: UIView!
     
     var tweet: Tweet?
+    @IBOutlet weak var replyTextView: UITextView!
+    @IBOutlet weak var replyCancelButton: UIButton!
+    @IBOutlet weak var postReplyButton: UIButton!
+    @IBOutlet weak var remainingCharLabel: UILabel!
+    
+    let maxCharCount = 140
+    var remainingCharCount = 0 {
+        didSet {
+            self.remainingCharLabel.text = String(remainingCharCount)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +50,7 @@ class TweetViewController: UIViewController {
             }
             self.tweetTextView.text = tweet.tweetText
             self.createdAtLabel.text = getFormattedDateString(tweet.createdAt as Date)
+
             self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
             self.likeButton.isEnabled = !(tweet.favorited!)
             self.retweetButton.isEnabled = !(tweet.retweeted!)
@@ -45,6 +58,13 @@ class TweetViewController: UIViewController {
         self.profileImageView.layer.cornerRadius = 5
         self.profileImageView.clipsToBounds = true;
         self.resizeTextView()
+        self.replyView.isHidden = true
+        self.replyCancelButton.layer.cornerRadius = 8
+        self.replyCancelButton.clipsToBounds = true
+        self.postReplyButton.layer.cornerRadius = 8
+        self.postReplyButton.clipsToBounds = true
+        self.hideKeyboardWhenTappedAround()
+        self.replyTextView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,7 +109,6 @@ class TweetViewController: UIViewController {
     @IBAction func retweetButtonPressed(_ sender: AnyObject) {
         TwitterClient.sharedInstance.retweetStatus(self.tweet!.id!) { (tweet: Tweet?, error: Error?) in
             if let tweet = tweet {
-                print("retweet succeeded \(tweet)")
                 self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
                 self.retweetButton.isEnabled = !(tweet.retweeted!)
             }
@@ -103,7 +122,6 @@ class TweetViewController: UIViewController {
     @IBAction func likeButtonPressed(_ sender: AnyObject) {
         TwitterClient.sharedInstance.likeStatus(self.tweet!.id!) { (tweet: Tweet?, error: Error?) in
             if let tweet = tweet {
-                print("like succeeded \(tweet)")
                 self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
                 self.likeButton.isEnabled = !(tweet.favorited!)
             }
@@ -112,6 +130,33 @@ class TweetViewController: UIViewController {
                 self.showAlert(errorTitle: "Couldn't set favorite", errorString: error.localizedDescription)
             }
         }
+    }
+    
+    @IBAction func replyButtonPressed(_ sender: AnyObject) {
+        self.replyView.isHidden = false
+        self.replyTextView.text = "@\(self.tweet!.screenName!) "
+        self.replyTextView.becomeFirstResponder()
+    }
+    
+    @IBAction func replyCancelPressed(_ sender: AnyObject) {
+        self.replyView.isHidden = true
+        self.replyTextView.resignFirstResponder()
+    }
+    
+    @IBAction func postReplyPressed(_ sender: AnyObject) {
+        let tweetToPost = self.replyTextView.text
+        TwitterClient.sharedInstance.replyToStatus(tweetToPost!, tweetId: self.tweet!.id!) { (tweet: Tweet?, error: Error?) in
+            if let tweet = tweet {
+                self.replyView.isHidden = true
+                self.replyTextView.resignFirstResponder()
+                self.replyButton.isEnabled = false
+            }
+            if let error = error {
+                print("tweet reply error \(error)")
+                self.showAlert(errorTitle: "Error", errorString: error.localizedDescription)
+            }
+        }
+        
     }
     
     func showAlert(errorTitle: String, errorString: String) {
@@ -136,4 +181,25 @@ class TweetViewController: UIViewController {
     */
 
 }
+
+extension TweetViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TweetViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        self.replyTextView.endEditing(true)
+    }
+}
+
+extension TweetViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        self.remainingCharCount = self.maxCharCount - textView.text.characters.count
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.replyTextView.endEditing(true)
+    }
+}
+
 
