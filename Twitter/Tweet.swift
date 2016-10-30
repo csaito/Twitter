@@ -22,7 +22,7 @@ class Tweet : NSObject {
     var retweeted: Bool?
     
     init(tweetDictionary: NSDictionary) {
-        print("\(tweetDictionary)")
+        //print("\(tweetDictionary)")
         if let user = tweetDictionary["user"] {
             self.profileImageUrl = (user as! NSDictionary)["profile_image_url"] as? String
             self.userName = (user as! NSDictionary)["name"] as? String

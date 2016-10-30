@@ -83,11 +83,36 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    
     func getTimeline(completion: @escaping ([Tweet], Error?) -> Void) -> Void {
-        self.get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil,
+        let param: NSDictionary = [
+            "count" : 50
+        ]
+        getTimeline(params: param, completion: completion)
+    }
+    
+    func getTimeline(maxId: Int, completion: @escaping ([Tweet], Error?) -> Void) -> Void {
+        let param: NSDictionary = [
+            "count" : 50,
+            "max_id" : maxId
+        ]
+        getTimeline(params: param, completion: completion)
+    }
+    
+    func getTimeline(sinceId: Int, completion: @escaping ([Tweet], Error?) -> Void) -> Void {
+        let param: NSDictionary = [
+            "count" : 50,
+            "since_id" : sinceId
+        ]
+        getTimeline(params: param, completion: completion)
+    }
+    
+    func getTimeline(params: NSDictionary, completion: @escaping ([Tweet], Error?) -> Void) -> Void {
+        self.get("1.1/statuses/home_timeline.json", parameters: params, progress: nil,
                  success:
             { (task:URLSessionDataTask, response:Any?) -> Void in
                 let tweets = response as! [NSDictionary]
+                print("\(tweets)")
                 var tweetArray = [Tweet]()
                 for tweet in tweets {
                     tweetArray.append(Tweet(tweetDictionary: tweet))

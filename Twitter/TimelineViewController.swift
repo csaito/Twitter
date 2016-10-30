@@ -40,12 +40,24 @@ class TimelineViewController: UIViewController {
     }
     
     func retrieveTimeline() {
-        TwitterClient.sharedInstance.getTimeline(completion: {
-            (tweets: [Tweet], error: Error?) -> Void in
+        if (self.tweets.count > 0) {
+            let sinceId = self.tweets[0].id
+            TwitterClient.sharedInstance.getTimeline(sinceId: sinceId!, completion: {
+                (tweets: [Tweet], error: Error?) -> Void in
+                if tweets.count > 0 {
+                    self.tweets = tweets + self.tweets
+                }
+                self.refreshControl.endRefreshing()
+                self.tweetTableView.reloadData()
+            });
+        } else {
+            TwitterClient.sharedInstance.getTimeline(completion: {
+                (tweets: [Tweet], error: Error?) -> Void in
                 self.tweets = tweets
                 self.refreshControl.endRefreshing()
                 self.tweetTableView.reloadData()
-        });
+            });
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -54,19 +66,6 @@ class TimelineViewController: UIViewController {
             let tweetViewController = navigationController.viewControllers[0] as! TweetViewController
             tweetViewController.tweet = (sender as! TweetTableViewCell).tweet
         }
-        /**
-        if segue.identifier == "ComposeUpdateSegue" {
-            let navigationController = segue.destination as! UINavigationController
-            let composeViewController = navigationController.viewControllers[0] as! ComposeViewController
-            self.tweetVc = composeViewController as TweetProtocol
-            // Don't really have to do anything...
-        } else {
-            if let tweet = self.tweetVc?.getTweet() {
-                self.tweets.insert(tweet, at: 0)
-                self.tweetTableView.reloadData()
-            }
-        }
- **/
     }
 
     func refreshControlAction(refreshControl: UIRefreshControl) {
@@ -79,6 +78,21 @@ class TimelineViewController: UIViewController {
             self.tweetTableView.reloadData()
         }
     }
+    
+    func requestMoreTweets() {
+        let maxId = self.tweets[self.tweets.count-1].id
+        TwitterClient.sharedInstance.getTimeline(maxId: maxId!, completion: {
+            (tweets: [Tweet], error: Error?) -> Void in
+            if (tweets.count > 0) {
+                if (tweets[0].id != maxId) {
+                    print("Wrong ID!!!!  received \(tweets[0].id), expected \(maxId)")
+                }
+                self.tweets.popLast()
+                self.tweets.append(contentsOf: tweets)
+                self.tweetTableView.reloadData()
+            }
+        });
+    }
 
 }
 
@@ -87,7 +101,9 @@ extension TimelineViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell", for: indexPath) as! TweetTableViewCell
         cell.tweet = self.tweets[indexPath.row]
-        print("tweet \(cell.tweet)");
+        if (indexPath.row == self.tweets.count-1) {
+            self.requestMoreTweets()
+        }
         return cell
     }
     
