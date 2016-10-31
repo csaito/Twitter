@@ -124,25 +124,27 @@ class TweetViewController: UIViewController {
     @IBAction func likeButtonPressed(_ sender: AnyObject) {
         if (self.tweet!.favorited == true) {
             TwitterClient.sharedInstance.dislikeStatus(self.tweet!.id!) { (tweet: Tweet?, error: Error?) in
-                if let tweet = tweet {
-                    self.tweet = tweet
-                    self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
+                if tweet != nil {
+                    // Better not use the returned tweet, the numbers may not be updated in it.
+                    self.tweet?.favorited = false
+                    self.tweet?.favoritesCount! = (self.tweet?.favoritesCount!)! - 1
                     self.likeButton.isHighlighted = false
+                    self.setRetweetAndLikes(retweetCount: (self.tweet?.retweetCount!)!, favoritesCount: (self.tweet?.favoritesCount!)!)
                 }
                 if let error = error {
-                    print("tweet post error \(error)")
                     self.showAlert(errorTitle: "Couldn't destroy favorite", errorString: error.localizedDescription)
                 }
             }
         } else {
             TwitterClient.sharedInstance.likeStatus(self.tweet!.id!) { (tweet: Tweet?, error: Error?) in
-                if let tweet = tweet {
-                    self.tweet = tweet
-                    self.setRetweetAndLikes(retweetCount: tweet.retweetCount!, favoritesCount: tweet.favoritesCount!)
+                if tweet != nil {
+                    // Better not use the returned tweet, the numbers may not be updated in it.
+                    self.tweet?.favorited = true
+                    self.tweet?.favoritesCount! = (self.tweet?.favoritesCount!)! + 1
                     self.likeButton.isHighlighted = true
+                    self.setRetweetAndLikes(retweetCount: (self.tweet?.retweetCount!)!, favoritesCount: (self.tweet?.favoritesCount!)!)
                 }
                 if let error = error {
-                    print("tweet post error \(error)")
                     self.showAlert(errorTitle: "Couldn't set favorite", errorString: error.localizedDescription)
                 }
             }
