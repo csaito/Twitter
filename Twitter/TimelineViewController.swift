@@ -14,6 +14,8 @@ class TimelineViewController: UIViewController {
     @IBOutlet weak var tweetTableView: UITableView!
     var refreshControl = UIRefreshControl()
     
+    var isMentionsTimeline = true
+    
     var tweets = [Tweet]()
     
     override func viewDidLoad() {
@@ -39,25 +41,30 @@ class TimelineViewController: UIViewController {
         User.currentUser = nil
     }
     
+    func getTimelineFunc() -> (NSDictionary, @escaping ([Tweet], Error?) -> Void) -> Void {
+        if (self.isMentionsTimeline) {
+            return TwitterClient.sharedInstance.getMentionsTimeline
+        } else {
+            return TwitterClient.sharedInstance.getTimeline
+        }
+    }
+    
     func retrieveTimeline() {
+        let param: NSMutableDictionary = [
+            "count" : 50
+        ]
         if (self.tweets.count > 0) {
             let sinceId = self.tweets[0].id
-            TwitterClient.sharedInstance.getTimeline(sinceId: sinceId!, completion: {
-                (tweets: [Tweet], error: Error?) -> Void in
-                if tweets.count > 0 {
-                    self.tweets = tweets + self.tweets
-                }
-                self.refreshControl.endRefreshing()
-                self.tweetTableView.reloadData()
-            });
-        } else {
-            TwitterClient.sharedInstance.getTimeline(completion: {
-                (tweets: [Tweet], error: Error?) -> Void in
-                self.tweets = tweets
-                self.refreshControl.endRefreshing()
-                self.tweetTableView.reloadData()
-            });
+            param["sinceId"] = sinceId
         }
+        self.getTimelineFunc()(param, {
+            (tweets: [Tweet], error: Error?) -> Void in
+            if tweets.count > 0 {
+                self.tweets = tweets + self.tweets
+            }
+            self.refreshControl.endRefreshing()
+            self.tweetTableView.reloadData()
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -81,7 +88,11 @@ class TimelineViewController: UIViewController {
     
     func requestMoreTweets() {
         let maxId = self.tweets[self.tweets.count-1].id
-        TwitterClient.sharedInstance.getTimeline(maxId: maxId!, completion: {
+        let param: NSDictionary = [
+            "count" : 50,
+            "maxId" : maxId!
+        ]
+        self.getTimelineFunc()(param, {
             (tweets: [Tweet], error: Error?) -> Void in
             if (tweets.count > 0) {
                 if (tweets[0].id != maxId) {
@@ -93,7 +104,6 @@ class TimelineViewController: UIViewController {
             }
         });
     }
-
 }
 
 extension TimelineViewController: UITableViewDataSource {

@@ -83,7 +83,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    
+    /**
     func getTimeline(completion: @escaping ([Tweet], Error?) -> Void) -> Void {
         let param: NSDictionary = [
             "count" : 50
@@ -105,7 +105,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             "since_id" : sinceId
         ]
         getTimeline(params: param, completion: completion)
-    }
+    }**/
     
     func getTimeline(params: NSDictionary, completion: @escaping ([Tweet], Error?) -> Void) -> Void {
         self.get("1.1/statuses/home_timeline.json", parameters: params, progress: nil,
@@ -122,6 +122,48 @@ class TwitterClient: BDBOAuth1SessionManager {
                 print("error: \(error.localizedDescription)")
                 completion([Tweet](), error)
         })
+    }
+    
+    /**
+    func getMentionsTimeline(completion: @escaping ([Tweet], Error?) -> Void) -> Void {
+        let param: NSDictionary = [
+            "count" : 50
+        ]
+        getMentionsTimeline(params: param, completion: completion)
+    }
+    
+    func getMentionsTimeline(maxId: Int, completion: @escaping ([Tweet], Error?) -> Void) -> Void {
+        let param: NSDictionary = [
+            "count" : 50,
+            "max_id" : maxId
+        ]
+        getMentionsTimeline(params: param, completion: completion)
+    }
+    
+    func getMentionsTimeline(sinceId: Int, completion: @escaping ([Tweet], Error?) -> Void) -> Void {
+        let param: NSDictionary = [
+            "count" : 50,
+            "since_id" : sinceId
+        ]
+        getMentionsTimeline(params: param, completion: completion)
+    }
+    **/
+    func getMentionsTimeline(params: NSDictionary, completion: @escaping ([Tweet], Error?) -> Void) -> Void {
+        self.get("1.1/statuses/mentions_timeline.json", parameters: params, progress: nil,
+                 success:
+            { (task:URLSessionDataTask, response:Any?) -> Void in
+                let tweets = response as! [NSDictionary]
+                print("\(tweets)")
+                var tweetArray = [Tweet]()
+                for tweet in tweets {
+                    tweetArray.append(Tweet(tweetDictionary: tweet))
+                }
+                completion(tweetArray, nil)
+            }, failure: { (task:URLSessionDataTask?, error:Error) -> Void in
+                print("error: \(error.localizedDescription)")
+                completion([Tweet](), error)
+        })
+        
     }
     
     func updateStatus(_ tweet : String, completion: @escaping (Tweet?, Error?) -> Void) -> Void {
