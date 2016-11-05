@@ -29,7 +29,6 @@ class TimelineViewController: UIViewController {
         self.retrieveTimeline();
         self.refreshControl.addTarget(self, action: #selector(refreshControlAction(refreshControl:)), for: UIControlEvents.valueChanged)
         self.tweetTableView.insertSubview(refreshControl, at: 0)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -111,7 +110,7 @@ extension TimelineViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell", for: indexPath) as! TweetTableViewCell
         cell.tweet = self.tweets[indexPath.row]
-        if (indexPath.row == self.tweets.count-1) {
+        if (indexPath.row == self.tweets.count-1 && !self.isMentionsTimeline) {
             self.requestMoreTweets()
         }
         return cell

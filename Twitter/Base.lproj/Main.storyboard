@@ -62,12 +62,12 @@
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="7Qe-z2-OG1" id="94V-0T-xgY"/>
-                        <segue destination="aHd-bk-WRD" kind="show" identifier="DisplayTimelineSegue" id="Qgn-NI-TJ9"/>
+                        <segue destination="FmB-00-S88" kind="show" identifier="DisplayTimelineSegue" id="7qw-iA-x1Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-876" y="442"/>
+            <point key="canvasLocation" x="-1247" y="322"/>
         </scene>
         <!--Timeline View Controller-->
         <scene sceneID="nO8-Re-Upg">
@@ -642,7 +642,4 @@
         <image name="reply" width="512" height="512"/>
         <image name="retweet" width="512" height="512"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="2wZ-Fc-Vmf"/>
-    </inferredMetricsTieBreakers>
 </document>

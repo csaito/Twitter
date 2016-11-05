@@ -51,14 +51,15 @@ class LoginViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let rootViewController = segue.destination as! RootViewController
+        let menuViewController = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+        menuViewController.rootViewController = rootViewController
+        rootViewController.menuViewController = menuViewController
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
