@@ -21,8 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (User.currentUser != nil) {
             TwitterClient.sharedInstance.verifyUser()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "TimelineNavigationController")
-            window?.rootViewController = vc
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "RootViewController") as! RootViewController //"TimelineNavigationController")
+            let menuViewController = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController//"TimelineNavigationController")
+            window?.rootViewController = rootViewController
+            menuViewController.rootViewController = rootViewController
+            rootViewController.menuViewController = menuViewController
         }
  
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "UserDidLogout"), object: nil, queue: OperationQueue.main) { (Notification) in

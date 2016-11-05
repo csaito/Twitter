@@ -14,7 +14,7 @@ class TimelineViewController: UIViewController {
     @IBOutlet weak var tweetTableView: UITableView!
     var refreshControl = UIRefreshControl()
     
-    var isMentionsTimeline = true
+    var isMentionsTimeline = false
     
     var tweets = [Tweet]()
     
