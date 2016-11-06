@@ -103,9 +103,3 @@ extension ComposeViewController: UITextViewDelegate {
         self.remainingCharCount = self.maxCharCount - textView.text.characters.count
     }
 }
-
-extension ComposeViewController: TweetProtocol {
-    func getTweet() -> Tweet? {
-        return self.postedTweet
-    }
-}

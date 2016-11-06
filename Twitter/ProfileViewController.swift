@@ -21,9 +21,13 @@ class ProfileViewController: UIViewController {
         
         self.user = User.currentUser
         self.profileTableView.estimatedRowHeight = 200
+
         self.profileTableView.rowHeight = UITableViewAutomaticDimension
         self.profileTableView.dataSource = self
         self.profileTableView.delegate = self
+        
+        
+        self.title = "Profile"
         
         
         let nib = UINib(nibName: "TimelineItemTableViewCell", bundle: nil)
@@ -57,16 +61,20 @@ class ProfileViewController: UIViewController {
         self.retrieveTimelineForUser()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func backButtonPressed(_ sender: AnyObject) {
+        
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ViewTweetFromProfileSegue" {
+            let navigationController = segue.destination as! UINavigationController
+            let tweetViewController = navigationController.viewControllers[0] as! TweetViewController
+            tweetViewController.tweet = (sender as! TimelineItemTableViewCell).tweet
+        }
+    }
+    
+    @IBAction func unwindFromSegue(segue: UIStoryboardSegue) {
+    }
 
 }
 
@@ -101,5 +109,8 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.section == 1) {
+            self.performSegue(withIdentifier: "ViewTweetFromProfileSegue", sender: tableView.cellForRow(at: indexPath))
+        }
     }
 }

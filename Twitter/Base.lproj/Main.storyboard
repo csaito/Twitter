@@ -85,14 +85,14 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TimelineItemTableViewCell" rowHeight="163" id="h4d-4X-YoN" customClass="TimelineItemTableViewCell" customModule="Twitter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="163"/>
+                                        <rect key="frame" x="0.0" y="92" width="375" height="163"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h4d-4X-YoN" id="Zd9-Pl-hs1">
                                             <frame key="frameInset" width="375" height="162"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="cYL-1W-2DQ" kind="show" identifier="ViewTweetSegue" id="ZSS-Ku-gfl"/>
+                                            <segue destination="cYL-1W-2DQ" kind="presentation" identifier="ViewTweetSegue" id="ZSS-Ku-gfl"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -253,6 +253,9 @@
                                             <frame key="frameInset" width="375"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="cYL-1W-2DQ" kind="presentation" identifier="ViewTweetFromProfileSegue" id="zJh-Cj-xdu"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -273,6 +276,9 @@
                                 <state key="normal" title="Back">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="L3j-hq-48F" eventType="touchUpInside" id="0WS-Al-re7"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -741,7 +747,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Back" id="Ds5-il-XYL">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="aHd-bk-WRD" kind="show" id="2wZ-Fc-Vmf"/>
+                                <segue destination="Bci-MF-5m6" kind="unwind" identifier="UnwindFromTweetView" unwindAction="unwindFromSegueWithSegue:" id="xbm-j6-E7O"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -765,6 +771,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T5Z-Nq-lGs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Bci-MF-5m6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2825" y="239"/>
         </scene>
@@ -812,4 +819,7 @@
         <image name="reply" width="512" height="512"/>
         <image name="retweet" width="512" height="512"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="zJh-Cj-xdu"/>
+    </inferredMetricsTieBreakers>
 </document>

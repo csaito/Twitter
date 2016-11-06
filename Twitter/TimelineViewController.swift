@@ -21,8 +21,9 @@ class TimelineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Home"
+        self.title = self.isMentionsTimeline ? "Mentions" : "Home"
         self.tweetTableView.dataSource = self
+        self.tweetTableView.delegate = self
         self.tweetTableView.estimatedRowHeight = 100
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
         let nib = UINib(nibName: "TimelineItemTableViewCell", bundle: nil)
@@ -81,9 +82,11 @@ class TimelineViewController: UIViewController {
     }
     
     @IBAction func unwindFromSegue(segue: UIStoryboardSegue) {
-        if let tweet = (segue.source as! ComposeViewController).postedTweet {
-            self.tweets.insert(tweet, at: 0)
-            self.tweetTableView.reloadData()
+        if (segue.identifier! == "ComposeUnwindSegue") {
+            if let tweet = (segue.source as! ComposeViewController).postedTweet {
+                self.tweets.insert(tweet, at: 0)
+                self.tweetTableView.reloadData()
+            }
         }
     }
     
@@ -128,6 +131,8 @@ extension TimelineViewController: UITableViewDataSource {
     
 }
 
-protocol TweetProtocol {
-    func getTweet() -> Tweet?
+extension TimelineViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ViewTweetSegue", sender: tableView.cellForRow(at: indexPath))
+    }
 }
