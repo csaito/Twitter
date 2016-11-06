@@ -19,16 +19,15 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.user = User.currentUser
+        if (self.user == nil) {
+            self.user = User.currentUser
+        }
         self.profileTableView.estimatedRowHeight = 200
-
         self.profileTableView.rowHeight = UITableViewAutomaticDimension
         self.profileTableView.dataSource = self
-        self.profileTableView.delegate = self
-        
+        //self.profileTableView.delegate = self
         
         self.title = "Profile"
-        
         
         let nib = UINib(nibName: "TimelineItemTableViewCell", bundle: nil)
         self.profileTableView.register(nib, forCellReuseIdentifier: "TimelineItemTableViewCell")
@@ -61,10 +60,6 @@ class ProfileViewController: UIViewController {
         self.retrieveTimelineForUser()
     }
     
-    @IBAction func backButtonPressed(_ sender: AnyObject) {
-        
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ViewTweetFromProfileSegue" {
             let navigationController = segue.destination as! UINavigationController
@@ -74,6 +69,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func unwindFromSegue(segue: UIStoryboardSegue) {
+        //self.dismiss(animated: true, completion: nil)
     }
 
 }
@@ -90,6 +86,7 @@ extension ProfileViewController: UITableViewDataSource {
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineItemTableViewCell", for: indexPath) as! TimelineItemTableViewCell
             cell.tweet = self.tweets[indexPath.row]
+            cell.selectionDelegate = self
             returnCell = cell
             break
         default: break
@@ -112,5 +109,15 @@ extension ProfileViewController : UITableViewDelegate {
         if (indexPath.section == 1) {
             self.performSegue(withIdentifier: "ViewTweetFromProfileSegue", sender: tableView.cellForRow(at: indexPath))
         }
+    }
+}
+
+extension ProfileViewController: TimelineItemSelected {
+    
+    func tweetSelected(selected: TimelineItemTableViewCell) {
+        self.performSegue(withIdentifier: "ViewTweetFromProfileSegue", sender: selected)
+    }
+    
+    func profileSelected(selected: TimelineItemTableViewCell) {
     }
 }

@@ -88,7 +88,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="163"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h4d-4X-YoN" id="Zd9-Pl-hs1">
-                                            <frame key="frameInset" width="375" height="162"/>
+                                            <frame key="frameInset" width="375" height="163"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -122,6 +122,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tweetTableView" destination="Kcb-AW-HCb" id="m1e-UF-O1f"/>
+                        <segue destination="h1X-CP-Es3" kind="presentation" identifier="ViewProfileSegue" id="npS-Ww-u80"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K1F-r3-NRw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -152,10 +153,10 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="259"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hv9-Z0-NBA" id="Ndz-qj-xoL">
-                                            <frame key="frameInset" width="375" height="258"/>
+                                            <frame key="frameInset" width="375" height="259"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yux-yH-izR">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yux-yH-izR">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="80" id="8cU-fu-H8i"/>
                                                     </constraints>
@@ -250,7 +251,7 @@
                                         <rect key="frame" x="0.0" y="287" width="375" height="1"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dph-Nf-Cma" id="IeD-Ya-NMc">
-                                            <frame key="frameInset" width="375"/>
+                                            <frame key="frameInset" width="375" height="1"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -277,7 +278,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="backButtonPressed:" destination="L3j-hq-48F" eventType="touchUpInside" id="0WS-Al-re7"/>
+                                    <segue destination="5vc-HY-FCC" kind="unwind" unwindAction="unwindFromSegueWithSegue:" id="heb-Xw-u2Z"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -287,6 +288,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pVB-gd-kgF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5vc-HY-FCC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3096.8000000000002" y="1144.6776611694154"/>
         </scene>
@@ -445,7 +447,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="282"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ekP-NN-dGk" id="lC1-rX-cDp">
-                                            <frame key="frameInset" width="375" height="281"/>
+                                            <frame key="frameInset" width="375" height="282"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="znf-91-B5w">
@@ -488,7 +490,7 @@
                                         <rect key="frame" x="0.0" y="310" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z7n-Sa-R8J" id="Fkw-tQ-O1n">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>

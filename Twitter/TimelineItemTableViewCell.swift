@@ -16,6 +16,8 @@ class TimelineItemTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var displayNameLabel: UILabel!
     
+    var selectionDelegate: TimelineItemSelected?
+    
     var tweet: Tweet? {
         didSet {
             if let tweet = tweet {
@@ -49,6 +51,32 @@ class TimelineItemTableViewCell: UITableViewCell {
         super.layoutSubviews()
         self.profileImageView.layer.cornerRadius = 5
         self.profileImageView.clipsToBounds = true;
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: (#selector(TimelineItemTableViewCell.onCellTapped(_:))))
+        tapRecognizer.delegate = self;
+        tapRecognizer.numberOfTapsRequired = 1
+        self.contentView.addGestureRecognizer(tapRecognizer)
     }
     
+    func onCellTapped(_ tapGestureRecognizer: UITapGestureRecognizer) {
+        let point = tapGestureRecognizer.location(in: self.contentView)
+        if tapGestureRecognizer.state == .began {
+        } else if tapGestureRecognizer.state == .changed {
+        } else if tapGestureRecognizer.state == .ended {
+            if (point.x < 45) {
+                if let delegate = self.selectionDelegate {
+                    delegate.profileSelected(selected: self)
+                }
+            } else {
+                if let delegate = self.selectionDelegate {
+                    delegate.tweetSelected(selected: self)
+                }
+            }
+        }
+    }
+}
+
+protocol TimelineItemSelected {
+    func tweetSelected(selected: TimelineItemTableViewCell)
+    func profileSelected(selected: TimelineItemTableViewCell)
 }

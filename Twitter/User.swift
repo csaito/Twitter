@@ -26,7 +26,6 @@ class User : NSObject {
         self.backgroundImageUrl = userDirectory["profile_background_image_url"] as? String
     }
 
-    
     static var currentUser: User? {
         get {
             let data = UserDefaults.standard.data(forKey: "currentUser")

@@ -23,7 +23,7 @@ class TimelineViewController: UIViewController {
         
         self.title = self.isMentionsTimeline ? "Mentions" : "Home"
         self.tweetTableView.dataSource = self
-        self.tweetTableView.delegate = self
+        //self.tweetTableView.delegate = self
         self.tweetTableView.estimatedRowHeight = 100
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
         let nib = UINib(nibName: "TimelineItemTableViewCell", bundle: nil)
@@ -74,6 +74,10 @@ class TimelineViewController: UIViewController {
             let navigationController = segue.destination as! UINavigationController
             let tweetViewController = navigationController.viewControllers[0] as! TweetViewController
             tweetViewController.tweet = (sender as! TimelineItemTableViewCell).tweet
+        } else if segue.identifier == "ViewProfileSegue" {
+            let navigationController = segue.destination as! UINavigationController
+            let profileViewController = navigationController.viewControllers[0] as! ProfileViewController
+            profileViewController.user = (sender as! TimelineItemTableViewCell).tweet?.user
         }
     }
 
@@ -82,7 +86,7 @@ class TimelineViewController: UIViewController {
     }
     
     @IBAction func unwindFromSegue(segue: UIStoryboardSegue) {
-        if (segue.identifier! == "ComposeUnwindSegue") {
+        if (segue.identifier == "ComposeUnwindSegue") {
             if let tweet = (segue.source as! ComposeViewController).postedTweet {
                 self.tweets.insert(tweet, at: 0)
                 self.tweetTableView.reloadData()
@@ -114,6 +118,7 @@ extension TimelineViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineItemTableViewCell", for: indexPath) as! TimelineItemTableViewCell
+        cell.selectionDelegate = self
         cell.tweet = self.tweets[indexPath.row]
         if (indexPath.row == self.tweets.count-1 && !self.isMentionsTimeline) {
             self.requestMoreTweets()
@@ -128,11 +133,21 @@ extension TimelineViewController: UITableViewDataSource {
     public func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
 }
 
 extension TimelineViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "ViewTweetSegue", sender: tableView.cellForRow(at: indexPath))
+    }
+}
+
+extension TimelineViewController: TimelineItemSelected {
+    
+    func tweetSelected(selected: TimelineItemTableViewCell) {
+        self.performSegue(withIdentifier: "ViewTweetSegue", sender: selected)
+    }
+    
+    func profileSelected(selected: TimelineItemTableViewCell) {
+        self.performSegue(withIdentifier: "ViewProfileSegue", sender: selected)
     }
 }

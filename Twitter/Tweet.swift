@@ -20,6 +20,7 @@ class Tweet : NSObject {
     var id: Int?
     var favorited: Bool?
     var retweeted: Bool?
+    var user: User?
     
     init(tweetDictionary: NSDictionary) {
         //print("\(tweetDictionary)")
@@ -27,6 +28,7 @@ class Tweet : NSObject {
             self.profileImageUrl = (user as! NSDictionary)["profile_image_url"] as? String
             self.userName = (user as! NSDictionary)["name"] as? String
             self.screenName = (user as! NSDictionary)["screen_name"] as? String
+            self.user = User(userDirectory: user as! NSDictionary)
         }
         self.tweetText = tweetDictionary["text"] as? String
         let formatter = DateFormatter()
