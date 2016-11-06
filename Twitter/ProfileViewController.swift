@@ -18,7 +18,6 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         self.user = User.currentUser
-        print("current user: \(self.user)")
         self.profileTableView.estimatedRowHeight = 200
         self.profileTableView.rowHeight = UITableViewAutomaticDimension
         self.profileTableView.dataSource = self
@@ -53,7 +52,7 @@ extension ProfileViewController: UITableViewDataSource {
             returnCell = cell
             break
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineTableViewCell", for: indexPath)
             //cell.textLabel?.text = self.menuItems[indexPath.row]
             returnCell = cell
             break
@@ -67,7 +66,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
 }

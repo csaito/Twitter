@@ -188,20 +188,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6xu-rR-wJx">
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gp-Pw-1Lj">
+                                <frame key="frameInset" minX="67" minY="269" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="separatorColor" red="0.86038698189999996" green="0.85365261209999999" blue="0.60461234109999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DoV-Fq-M3W">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProfileTableViewCell" rowHeight="227" id="K7M-o6-b5P" customClass="ProfileTableViewCell" customModule="Twitter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="227"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProfileTableViewCell" rowHeight="259" id="hv9-Z0-NBA" customClass="ProfileTableViewCell" customModule="Twitter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="259"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K7M-o6-b5P" id="Ipe-Pk-cvp">
-                                            <frame key="frameInset" width="375" height="227"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hv9-Z0-NBA" id="Ndz-qj-xoL">
+                                            <frame key="frameInset" width="375" height="258"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AmE-cL-ViN">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yux-yH-izR">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="120" id="Mob-wN-uPQ"/>
+                                                        <constraint firstAttribute="height" constant="80" id="8cU-fu-H8i"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fgT-cb-Ifw">
@@ -250,7 +254,6 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="BVe-o8-Eiu"/>
                                                         <constraint firstItem="Awg-N0-JPj" firstAttribute="leading" secondItem="NJ0-cA-wS1" secondAttribute="trailing" constant="5" id="IBj-on-1Hl"/>
                                                         <constraint firstItem="NbU-aX-ylu" firstAttribute="centerY" secondItem="beL-jx-nXq" secondAttribute="centerY" id="KLi-OC-5u3"/>
                                                         <constraint firstItem="6RE-G2-1jN" firstAttribute="leading" secondItem="beL-jx-nXq" secondAttribute="leading" constant="18" id="Nhe-aP-f5u"/>
@@ -264,44 +267,50 @@
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.86038698189999996" green="0.62211408109999999" blue="0.71180870289999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ju5-XY-1m4" secondAttribute="trailing" constant="8" id="2pn-Of-y3g"/>
-                                                <constraint firstItem="fgT-cb-Ifw" firstAttribute="top" secondItem="Ipe-Pk-cvp" secondAttribute="top" constant="90" id="3hb-84-gy6"/>
-                                                <constraint firstItem="jsr-dl-sLz" firstAttribute="trailing" secondItem="Ipe-Pk-cvp" secondAttribute="trailingMargin" constant="8" id="FMW-1K-hlO"/>
-                                                <constraint firstAttribute="trailing" secondItem="AmE-cL-ViN" secondAttribute="trailing" id="Hzi-2H-y4G"/>
-                                                <constraint firstItem="beL-jx-nXq" firstAttribute="top" secondItem="jsr-dl-sLz" secondAttribute="bottom" constant="5" id="QJs-JZ-mLT"/>
-                                                <constraint firstItem="jsr-dl-sLz" firstAttribute="leading" secondItem="Ipe-Pk-cvp" secondAttribute="leadingMargin" constant="8" id="USo-gv-ppJ"/>
-                                                <constraint firstItem="ju5-XY-1m4" firstAttribute="leading" secondItem="fgT-cb-Ifw" secondAttribute="trailing" constant="8" id="VIU-yo-Wim"/>
-                                                <constraint firstItem="fgT-cb-Ifw" firstAttribute="leading" secondItem="Ipe-Pk-cvp" secondAttribute="leading" constant="14" id="ZHJ-lo-sqj"/>
-                                                <constraint firstAttribute="trailing" secondItem="beL-jx-nXq" secondAttribute="trailing" id="eZK-ma-RJU"/>
-                                                <constraint firstItem="beL-jx-nXq" firstAttribute="leading" secondItem="Ipe-Pk-cvp" secondAttribute="leading" id="feH-AD-r9C"/>
-                                                <constraint firstItem="AmE-cL-ViN" firstAttribute="top" secondItem="Ipe-Pk-cvp" secondAttribute="top" id="iLH-ru-m2f"/>
-                                                <constraint firstItem="ju5-XY-1m4" firstAttribute="top" secondItem="AmE-cL-ViN" secondAttribute="bottom" constant="8" id="nZc-8A-Ep9"/>
-                                                <constraint firstItem="jsr-dl-sLz" firstAttribute="top" secondItem="fgT-cb-Ifw" secondAttribute="bottom" constant="5" id="sBN-hE-aYL"/>
-                                                <constraint firstItem="AmE-cL-ViN" firstAttribute="leading" secondItem="Ipe-Pk-cvp" secondAttribute="leading" id="ylp-j0-iVm"/>
+                                                <constraint firstItem="ju5-XY-1m4" firstAttribute="bottom" secondItem="fgT-cb-Ifw" secondAttribute="bottom" id="7Jc-hh-73V"/>
+                                                <constraint firstItem="beL-jx-nXq" firstAttribute="leading" secondItem="Ndz-qj-xoL" secondAttribute="leading" id="A1P-nN-xko"/>
+                                                <constraint firstItem="fgT-cb-Ifw" firstAttribute="top" secondItem="Ndz-qj-xoL" secondAttribute="top" constant="60" id="CF2-Vu-HvU"/>
+                                                <constraint firstItem="jsr-dl-sLz" firstAttribute="top" secondItem="ju5-XY-1m4" secondAttribute="bottom" constant="8" id="JSl-us-SdX"/>
+                                                <constraint firstAttribute="trailing" secondItem="jsr-dl-sLz" secondAttribute="trailing" constant="8" id="Mm9-7p-wrA"/>
+                                                <constraint firstAttribute="bottom" secondItem="beL-jx-nXq" secondAttribute="bottom" constant="20" id="Oli-8q-3ci"/>
+                                                <constraint firstItem="ju5-XY-1m4" firstAttribute="leading" secondItem="fgT-cb-Ifw" secondAttribute="trailing" constant="8" symbolic="YES" id="Qj1-AW-9Ip"/>
+                                                <constraint firstItem="jsr-dl-sLz" firstAttribute="leading" secondItem="Ndz-qj-xoL" secondAttribute="leading" constant="16" id="ab3-XY-Sjx"/>
+                                                <constraint firstItem="Yux-yH-izR" firstAttribute="leading" secondItem="Ndz-qj-xoL" secondAttribute="leading" id="gjO-H5-Z95"/>
+                                                <constraint firstItem="Yux-yH-izR" firstAttribute="top" secondItem="Ndz-qj-xoL" secondAttribute="top" id="ms3-xv-OaQ"/>
+                                                <constraint firstItem="beL-jx-nXq" firstAttribute="top" secondItem="jsr-dl-sLz" secondAttribute="bottom" constant="12" id="o5R-9G-Crt"/>
+                                                <constraint firstAttribute="trailing" secondItem="Yux-yH-izR" secondAttribute="trailing" id="r6u-do-dWh"/>
+                                                <constraint firstItem="fgT-cb-Ifw" firstAttribute="leading" secondItem="Ndz-qj-xoL" secondAttribute="leading" constant="8" id="s9v-eD-XIp"/>
+                                                <constraint firstAttribute="trailing" secondItem="ju5-XY-1m4" secondAttribute="trailing" constant="8" id="uxf-zB-C4f"/>
+                                                <constraint firstAttribute="trailing" secondItem="beL-jx-nXq" secondAttribute="trailing" id="wR7-mT-jhp"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <outlet property="backgroudImageView" destination="AmE-cL-ViN" id="cYf-VQ-Cdj"/>
-                                            <outlet property="followersNumLabel" destination="NJ0-cA-wS1" id="e6Q-kV-WmH"/>
-                                            <outlet property="followingNumLabel" destination="6RE-G2-1jN" id="qXp-zu-UBI"/>
-                                            <outlet property="profileImageView" destination="fgT-cb-Ifw" id="BXj-tv-a9y"/>
-                                            <outlet property="screenNameLabel" destination="ju5-XY-1m4" id="22x-rl-RYU"/>
-                                            <outlet property="userNameLabel" destination="jsr-dl-sLz" id="K0O-Ix-dkc"/>
+                                            <outlet property="backgroudImageView" destination="Yux-yH-izR" id="49e-la-B3t"/>
+                                            <outlet property="followersNumLabel" destination="NJ0-cA-wS1" id="QvD-bk-mV8"/>
+                                            <outlet property="followingNumLabel" destination="6RE-G2-1jN" id="J7D-ju-pZU"/>
+                                            <outlet property="profileImageView" destination="fgT-cb-Ifw" id="7PY-lu-tWl"/>
+                                            <outlet property="screenNameLabel" destination="ju5-XY-1m4" id="pZw-z0-sdz"/>
+                                            <outlet property="userNameLabel" destination="jsr-dl-sLz" id="ILx-v7-oPk"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TimelineTableViewCell" id="dph-Nf-Cma" customClass="TimelineItemTableViewCell" customModule="Twitter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="287" width="375" height="1"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dph-Nf-Cma" id="IeD-Ya-NMc">
+                                            <frame key="frameInset" width="375"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6xu-rR-wJx" firstAttribute="top" secondItem="o05-xU-iQT" secondAttribute="bottom" id="HFA-7k-yTu"/>
-                            <constraint firstItem="6xu-rR-wJx" firstAttribute="leading" secondItem="yvu-ep-KYd" secondAttribute="leading" id="NE6-6S-qgx"/>
-                            <constraint firstItem="nzr-Mt-vNx" firstAttribute="top" secondItem="6xu-rR-wJx" secondAttribute="bottom" id="p5g-a1-kfe"/>
-                            <constraint firstAttribute="trailing" secondItem="6xu-rR-wJx" secondAttribute="trailing" id="wBy-8j-a6t"/>
+                            <constraint firstItem="DoV-Fq-M3W" firstAttribute="top" secondItem="o05-xU-iQT" secondAttribute="bottom" constant="8" id="H86-HP-1J7"/>
+                            <constraint firstItem="nzr-Mt-vNx" firstAttribute="top" secondItem="DoV-Fq-M3W" secondAttribute="bottom" id="Iev-I0-6Oo"/>
+                            <constraint firstItem="DoV-Fq-M3W" firstAttribute="leading" secondItem="yvu-ep-KYd" secondAttribute="leading" id="Oce-hC-2UN"/>
+                            <constraint firstAttribute="trailing" secondItem="DoV-Fq-M3W" secondAttribute="trailing" id="V89-pB-JFC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4D0-Uw-Svf">
@@ -316,7 +325,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="profileTableView" destination="6xu-rR-wJx" id="uwu-Ud-C9a"/>
+                        <outlet property="profileTableView" destination="DoV-Fq-M3W" id="UVr-b3-xEe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pVB-gd-kgF" userLabel="First Responder" sceneMemberID="firstResponder"/>

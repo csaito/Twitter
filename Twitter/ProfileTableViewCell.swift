@@ -21,6 +21,7 @@ class ProfileTableViewCell: UITableViewCell {
     
     var user: User? {
         didSet {
+            
             if let user = user {
                 self.userNameLabel.text = user.userName
                 if let screenName = user.screenName {
@@ -51,6 +52,12 @@ class ProfileTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.profileImageView.layer.cornerRadius = 5
+        self.profileImageView.clipsToBounds = true;
     }
 
 }
