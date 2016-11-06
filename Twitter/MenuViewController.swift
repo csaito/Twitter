@@ -13,7 +13,8 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var menuTableView: UITableView!
     let menuItems = [ "timeline", "mentions" ]
     
-    private var timelineNativationController: UIViewController!
+    private var profileNavigationController: UIViewController!
+    private var timelineNavigationController: UIViewController!
     private var mentionsNavigationController: UIViewController!
     
     var viewControllers: [UIViewController] = []
@@ -24,19 +25,25 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        self.timelineNativationController = storyboard.instantiateViewController(withIdentifier: "TimelineNavigationController")
+        
+        self.profileNavigationController = storyboard.instantiateViewController(withIdentifier:
+            "ProfileNavigationController")
+        self.timelineNavigationController = storyboard.instantiateViewController(withIdentifier: "TimelineNavigationController")
         self.mentionsNavigationController = storyboard.instantiateViewController(withIdentifier: "TimelineNavigationController")
         
         let mentionsVC = (self.mentionsNavigationController as! UINavigationController).viewControllers[0] as! TimelineViewController
         mentionsVC.isMentionsTimeline = true
         
-        self.viewControllers.append(timelineNativationController)
+        self.viewControllers.append(profileNavigationController)
+        self.viewControllers.append(timelineNavigationController)
         self.viewControllers.append(mentionsNavigationController)
         
-        rootViewController?.contentViewController = timelineNativationController
+        rootViewController?.contentViewController = profileNavigationController
         
-        menuTableView.dataSource = self
-        menuTableView.delegate = self
+        self.menuTableView.estimatedRowHeight = 200
+        self.menuTableView.rowHeight = UITableViewAutomaticDimension
+        self.menuTableView.dataSource = self
+        self.menuTableView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,21 +66,41 @@ class MenuViewController: UIViewController {
 
 extension MenuViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath)
-        cell.textLabel?.text = self.menuItems[indexPath.row]
-        return cell
+        var returnCell = UITableViewCell()
+        switch (indexPath.section) {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileMenuTableViewCell", for: indexPath) as! ProfileMenuTableViewCell
+            cell.user = User.currentUser
+            returnCell = cell
+            break
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath)
+            cell.textLabel?.text = self.menuItems[indexPath.row]
+            returnCell = cell
+            break
+        default: break
+        }
+        return returnCell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.menuItems.count
+        return (section == 0) ? 1 : self.menuItems.count
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
 }
 
 extension MenuViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        rootViewController?.contentViewController = viewControllers[(indexPath as NSIndexPath).row]
+        if (indexPath.section == 0) {
+            rootViewController?.contentViewController = viewControllers[0]
+        } else {
+            rootViewController?.contentViewController = viewControllers[(indexPath as NSIndexPath).row+1]
+        }
     }
 }
 

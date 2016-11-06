@@ -70,7 +70,7 @@ class TimelineViewController: UIViewController {
         if segue.identifier == "ViewTweetSegue" {
             let navigationController = segue.destination as! UINavigationController
             let tweetViewController = navigationController.viewControllers[0] as! TweetViewController
-            tweetViewController.tweet = (sender as! TweetTableViewCell).tweet
+            tweetViewController.tweet = (sender as! TimelineItemTableViewCell).tweet
         }
     }
 
@@ -108,7 +108,7 @@ class TimelineViewController: UIViewController {
 extension TimelineViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell", for: indexPath) as! TweetTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineItemTableViewCell", for: indexPath) as! TimelineItemTableViewCell
         cell.tweet = self.tweets[indexPath.row]
         if (indexPath.row == self.tweets.count-1 && !self.isMentionsTimeline) {
             self.requestMoreTweets()

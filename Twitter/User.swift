@@ -10,6 +10,9 @@ class User : NSObject {
     var userName: String?
     var screenName: String?
     var id : Int?
+    var following: Int?
+    var followers: Int?
+    var backgroundImageUrl: String?
     var dictionary : NSDictionary?
     
     init(userDirectory: NSDictionary) {
@@ -18,7 +21,9 @@ class User : NSObject {
         self.userName = userDirectory["name"] as? String
         self.screenName = userDirectory["screen_name"] as? String
         self.id = userDirectory["id"] as? Int
-        print("userDictionary \(self.dictionary)")
+        self.following = userDirectory["friends_count"] as? Int
+        self.followers = userDirectory["followers_count"] as? Int
+        self.backgroundImageUrl = userDirectory["profile_background_image_url"] as? String
     }
 
     

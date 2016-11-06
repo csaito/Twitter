@@ -166,6 +166,28 @@ class TwitterClient: BDBOAuth1SessionManager {
         
     }
     
+    func getUserTimeine(userId: Int, completion: @escaping ([Tweet], Error?) -> Void) -> Void {
+        let params: NSDictionary = [
+            "count" : 50,
+            "user_id" : userId
+        ]
+        self.get("1.1/statuses/user_timeline.json", parameters: params, progress: nil,
+                 success:
+            { (task:URLSessionDataTask, response:Any?) -> Void in
+                let tweets = response as! [NSDictionary]
+                print("\(tweets)")
+                var tweetArray = [Tweet]()
+                for tweet in tweets {
+                    tweetArray.append(Tweet(tweetDictionary: tweet))
+                }
+                completion(tweetArray, nil)
+            }, failure: { (task:URLSessionDataTask?, error:Error) -> Void in
+                print("error: \(error.localizedDescription)")
+                completion([Tweet](), error)
+        })
+        
+    }
+    
     func updateStatus(_ tweet : String, completion: @escaping (Tweet?, Error?) -> Void) -> Void {
         let param: NSDictionary = [
             "status" : tweet
