@@ -1,19 +1,90 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="TimelineItemTableViewCell" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="207" id="KGk-i7-Jjw" customClass="TimelineItemTableViewCell" customModule="Twitter" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="405" height="207"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="43"/>
+                <frame key="frameInset" width="405" height="206"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3IM-W9-jXL">
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLx-5d-X2X">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SoO-kR-dQZ">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1hu-FH-cqu">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="L5B-rW-MuO"/>
+                                            <constraint firstAttribute="height" constant="40" id="tv6-IG-b9n"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6c-cW-DUu">
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chihiro Saito" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0z0-uc-yeU">
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@saito_chihiro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPz-Nz-WqG">
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3d" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F26-av-3Vi">
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="0z0-uc-yeU" firstAttribute="leading" secondItem="1hu-FH-cqu" secondAttribute="trailing" constant="5" id="581-69-Ki8"/>
+                                    <constraint firstItem="1hu-FH-cqu" firstAttribute="centerY" secondItem="SoO-kR-dQZ" secondAttribute="centerY" id="9yf-qe-xqr"/>
+                                    <constraint firstItem="C6c-cW-DUu" firstAttribute="top" secondItem="F26-av-3Vi" secondAttribute="bottom" constant="5" id="DKI-48-zhL"/>
+                                    <constraint firstItem="0z0-uc-yeU" firstAttribute="top" secondItem="SoO-kR-dQZ" secondAttribute="top" constant="8" id="Gse-yA-8B6"/>
+                                    <constraint firstAttribute="bottom" secondItem="C6c-cW-DUu" secondAttribute="bottom" constant="5" id="MHk-UY-syv"/>
+                                    <constraint firstItem="wPz-Nz-WqG" firstAttribute="leading" secondItem="0z0-uc-yeU" secondAttribute="trailing" constant="8" id="NG2-el-SWB"/>
+                                    <constraint firstItem="wPz-Nz-WqG" firstAttribute="bottom" secondItem="0z0-uc-yeU" secondAttribute="bottom" id="gUA-JH-m0p"/>
+                                    <constraint firstItem="F26-av-3Vi" firstAttribute="bottom" secondItem="0z0-uc-yeU" secondAttribute="bottom" id="hHL-4e-1vH"/>
+                                    <constraint firstAttribute="trailing" secondItem="F26-av-3Vi" secondAttribute="trailing" constant="8" id="mCU-P0-Mn0"/>
+                                    <constraint firstAttribute="trailing" secondItem="C6c-cW-DUu" secondAttribute="trailing" constant="8" id="pdx-NC-MRG"/>
+                                    <constraint firstItem="C6c-cW-DUu" firstAttribute="leading" secondItem="1hu-FH-cqu" secondAttribute="trailing" constant="5" id="r39-Od-D2A"/>
+                                    <constraint firstItem="1hu-FH-cqu" firstAttribute="leading" secondItem="SoO-kR-dQZ" secondAttribute="leading" constant="8" id="sbG-AJ-cRW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="3IM-W9-jXL" secondAttribute="trailing" id="2rV-Ts-cHj"/>
+                    <constraint firstAttribute="bottom" secondItem="3IM-W9-jXL" secondAttribute="bottom" id="7iF-jF-9jE"/>
+                    <constraint firstItem="3IM-W9-jXL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="GPo-18-gRh"/>
+                    <constraint firstItem="3IM-W9-jXL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="zVO-n5-a1J"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="displayNameLabel" destination="wPz-Nz-WqG" id="Ne1-GF-MfV"/>
+                <outlet property="profileImageView" destination="1hu-FH-cqu" id="VLg-K4-Udl"/>
+                <outlet property="tweetLabel" destination="C6c-cW-DUu" id="Gla-LZ-Xkw"/>
+                <outlet property="tweetTimeLabel" destination="F26-av-3Vi" id="1HP-nf-4J6"/>
+                <outlet property="userNameLabel" destination="0z0-uc-yeU" id="HcY-lg-qgy"/>
+            </connections>
+            <point key="canvasLocation" x="68.5" y="133.5"/>
         </tableViewCell>
     </objects>
 </document>

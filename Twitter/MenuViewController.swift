@@ -38,7 +38,7 @@ class MenuViewController: UIViewController {
         self.viewControllers.append(timelineNavigationController)
         self.viewControllers.append(mentionsNavigationController)
         
-        rootViewController?.contentViewController = profileNavigationController
+        rootViewController?.contentViewController = timelineNavigationController
         
         self.menuTableView.estimatedRowHeight = 200
         self.menuTableView.rowHeight = UITableViewAutomaticDimension

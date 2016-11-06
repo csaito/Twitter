@@ -166,7 +166,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         
     }
     
-    func getUserTimeine(userId: Int, completion: @escaping ([Tweet], Error?) -> Void) -> Void {
+    func getUserTimeline(userId: Int, completion: @escaping ([Tweet], Error?) -> Void) -> Void {
         let params: NSDictionary = [
             "count" : 50,
             "user_id" : userId

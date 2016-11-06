@@ -10,9 +10,11 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    let menuItems = ["One", "Two", "Three"]
+    var tweets = [Tweet]()
     var user : User?
     @IBOutlet weak var profileTableView: UITableView!
+    var refreshControl = UIRefreshControl()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +24,37 @@ class ProfileViewController: UIViewController {
         self.profileTableView.rowHeight = UITableViewAutomaticDimension
         self.profileTableView.dataSource = self
         self.profileTableView.delegate = self
+        
+        
+        let nib = UINib(nibName: "TimelineItemTableViewCell", bundle: nil)
+        self.profileTableView.register(nib, forCellReuseIdentifier: "TimelineItemTableViewCell")
+        self.refreshControl.addTarget(self, action: #selector(refreshControlAction(refreshControl:)), for: UIControlEvents.valueChanged)
+        self.profileTableView.insertSubview(refreshControl, at: 0)
+        
+        retrieveTimelineForUser()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func retrieveTimelineForUser() {
+        if let user = self.user {
+            if let userId = user.id {
+                TwitterClient.sharedInstance.getUserTimeline(userId: userId, completion: { (tweets: [Tweet], error: Error?) in
+                    if tweets.count > 0 {
+                        self.tweets = tweets + self.tweets
+                    }
+                    self.refreshControl.endRefreshing()
+                    self.profileTableView.reloadData()
+                })
+            }
+        }
+    }
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        self.retrieveTimelineForUser()
     }
     
 
@@ -52,8 +80,8 @@ extension ProfileViewController: UITableViewDataSource {
             returnCell = cell
             break
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineTableViewCell", for: indexPath)
-            //cell.textLabel?.text = self.menuItems[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineItemTableViewCell", for: indexPath) as! TimelineItemTableViewCell
+            cell.tweet = self.tweets[indexPath.row]
             returnCell = cell
             break
         default: break
@@ -62,7 +90,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (section == 0) ? 1 : self.menuItems.count
+        return (section == 0) ? 1 : self.tweets.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -25,6 +25,8 @@ class TimelineViewController: UIViewController {
         self.tweetTableView.dataSource = self
         self.tweetTableView.estimatedRowHeight = 100
         self.tweetTableView.rowHeight = UITableViewAutomaticDimension
+        let nib = UINib(nibName: "TimelineItemTableViewCell", bundle: nil)
+        self.tweetTableView.register(nib, forCellReuseIdentifier: "TimelineItemTableViewCell")
         
         self.retrieveTimeline();
         self.refreshControl.addTarget(self, action: #selector(refreshControlAction(refreshControl:)), for: UIControlEvents.valueChanged)
